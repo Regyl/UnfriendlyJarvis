@@ -4,9 +4,9 @@ services:
     ports:
       - '6379:6379'
   neo4j:
-    image: 'neo4j:4.0.0'
+    image: 'neo4j:4.4.17'
     ports:
       - '7474:7474'
       - '7687:7687'
     environment:
-      NEO4J_AUTH: 'neo4j/neo4j'
+      NEO4J_AUTH: 'neo4j/SomeUselessPassword02'

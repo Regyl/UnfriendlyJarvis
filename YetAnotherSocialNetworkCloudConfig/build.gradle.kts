@@ -3,6 +3,7 @@ plugins {
     id("org.springframework.boot") version "3.0.2"
     id("io.spring.dependency-management") version "1.1.0"
     id("checkstyle")
+    id("com.google.cloud.tools.jib") version "3.3.1"
 }
 
 group = "com.regyl"
