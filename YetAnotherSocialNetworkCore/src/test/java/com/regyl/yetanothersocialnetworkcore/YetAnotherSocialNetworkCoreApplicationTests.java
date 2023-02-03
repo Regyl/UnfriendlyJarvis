@@ -6,7 +6,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("dev")
-class YetAnotherSocialNetworkApplicationCoreTests {
+class YetAnotherSocialNetworkCoreApplicationTests {
 
     @Test
     void contextLoads() {

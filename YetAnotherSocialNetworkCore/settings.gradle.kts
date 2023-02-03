@@ -1,1 +1,1 @@
-rootProject.name = "YetAnotherSocialNetwork"
+rootProject.name = "YetAnotherSocialNetworkCore"

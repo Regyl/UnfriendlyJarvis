@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class YetAnotherSocialNetworkApplicationCore {
+public class YetAnotherSocialNetworkCoreApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(YetAnotherSocialNetworkApplicationCore.class, args);
+        SpringApplication.run(YetAnotherSocialNetworkCoreApplication.class, args);
     }
 
 }
