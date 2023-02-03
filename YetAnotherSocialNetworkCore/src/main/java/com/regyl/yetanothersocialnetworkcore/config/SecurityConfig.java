@@ -1,4 +1,4 @@
-package com.regyl.yetanothersocialnetwork.config;
+package com.regyl.yetanothersocialnetworkcore.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
