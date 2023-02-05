@@ -6,8 +6,8 @@ plugins {
     id("com.google.cloud.tools.jib") version "3.3.1"
 }
 
-group = "com.regyl"
-version = "0.0.1-SNAPSHOT"
+group = "com.regyl.yetanothersocialnetwork"
+version = "0.0.1"
 java.sourceCompatibility = JavaVersion.VERSION_19
 
 configurations {
@@ -26,7 +26,11 @@ extra["springCloudVersion"] = "2022.0.1"
 dependencies {
     implementation("org.springframework.cloud:spring-cloud-config-server")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server")
+
+    compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    annotationProcessor("org.projectlombok:lombok")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -38,4 +42,14 @@ dependencyManagement {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+jib {
+    to {
+        image = "registry.hub.docker.com/regyl/social-network-config"
+        auth {
+            username = System.getenv("DockerHubLogin")
+            password = System.getenv("DockerHubPassword")
+        }
+    }
 }
