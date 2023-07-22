@@ -12,3 +12,11 @@ services:
       - '7687:7687'
     environment:
       NEO4J_AUTH: 'neo4j/SomeUselessPassword02'
+  postgres:
+    image: 'postgres:15.3'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: 'idk_user'
+      POSTGRES_PASSWORD: 'SomeUselessPassword02'
+      POSTGRES_DB: 'yasn'

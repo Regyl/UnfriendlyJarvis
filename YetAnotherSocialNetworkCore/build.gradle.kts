@@ -1,3 +1,5 @@
+import org.gradle.api.JavaVersion
+
 plugins {
     java
     id("org.springframework.boot") version "3.0.2"
@@ -8,7 +10,7 @@ plugins {
 
 group = "com.regyl.yetanothersocialnetwork"
 version = "0.0.1"
-java.sourceCompatibility = JavaVersion.VERSION_19
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
     compileOnly {
@@ -29,14 +31,17 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-data-neo4j:3.0.2")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("org.springframework.kafka:spring-kafka")
-    implementation("com.google.protobuf:protobuf-java:3.21.12")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.1")
+    implementation("com.google.protobuf:protobuf-java:3.21.12")
+    implementation("org.postgresql:postgresql:42.6.0")
+//    implementation("guru.nidi:graphviz-java:0.18.1")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
