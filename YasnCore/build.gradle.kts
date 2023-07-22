@@ -8,7 +8,7 @@ plugins {
     id("com.google.cloud.tools.jib") version "3.3.1"
 }
 
-group = "com.regyl.yetanothersocialnetwork"
+group = "com.github.regyl.yetanothersocialnetwork"
 version = "0.0.1"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
@@ -29,14 +29,13 @@ extra["testcontainersVersion"] = "1.17.6"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
     implementation("org.springframework.boot:spring-boot-starter-data-neo4j:3.0.2")
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
-    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("org.springframework.kafka:spring-kafka")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.1")
     implementation("com.google.protobuf:protobuf-java:3.21.12")

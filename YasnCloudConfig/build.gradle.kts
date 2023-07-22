@@ -6,7 +6,7 @@ plugins {
     id("com.google.cloud.tools.jib") version "3.3.1"
 }
 
-group = "com.regyl.yetanothersocialnetwork"
+group = "com.github.regyl.yetanothersocialnetwork"
 version = "0.0.1"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
