@@ -1,2 +1,2 @@
 rootProject.name = "YetAnotherSocialNetworkCore"
-include("LeakedDataFiller")
+include("Migration")
