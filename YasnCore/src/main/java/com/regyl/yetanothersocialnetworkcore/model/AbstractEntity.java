@@ -21,7 +21,7 @@ public abstract class AbstractEntity {
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "source", columnDefinition = "NOT NULL DEFAULT OTHER")
+    @Column(name = "source", columnDefinition = "VARCHAR(50) NOT NULL DEFAULT 'OTHER'")
     @Enumerated(EnumType.STRING)
     private Source source;
 }

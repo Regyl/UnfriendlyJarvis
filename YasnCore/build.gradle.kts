@@ -6,11 +6,18 @@ plugins {
     id("io.spring.dependency-management") version "1.1.0"
     id("checkstyle")
     id("com.google.cloud.tools.jib") version "3.3.1"
+
+    jacoco
 }
 
 group = "com.github.regyl.yetanothersocialnetwork"
 version = "0.0.1"
 java.sourceCompatibility = JavaVersion.VERSION_17
+
+jacoco {
+    toolVersion = "0.8.9"
+    reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
+}
 
 configurations {
     compileOnly {
@@ -47,10 +54,12 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
 
+    testImplementation("org.modelmapper:modelmapper:3.1.1")
     testImplementation("org.assertj:assertj-core:3.24.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.kafka:spring-kafka-test")
     testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
     testImplementation("org.testcontainers:kafka")
     testImplementation("org.testcontainers:neo4j")
 }
@@ -64,4 +73,11 @@ dependencyManagement {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
 }
