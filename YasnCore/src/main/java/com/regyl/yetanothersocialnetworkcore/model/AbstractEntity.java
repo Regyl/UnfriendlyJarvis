@@ -1,8 +1,7 @@
 package com.regyl.yetanothersocialnetworkcore.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import com.regyl.yetanothersocialnetworkcore.model.enums.Source;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,16 +21,7 @@ public abstract class AbstractEntity {
     @GeneratedValue
     private UUID id;
 
-    /*@EqualsAndHashCode.Exclude
-    @CreationTimestamp
-    @Column(nullable = false)
-    private OffsetDateTime createDateTime;
-
-    @EqualsAndHashCode.Exclude
-    @UpdateTimestamp
-    @Column(nullable = false)
-    private OffsetDateTime updateDateTime;
-
-    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
-    private boolean isDeleted;*/
+    @Column(name = "source", columnDefinition = "NOT NULL DEFAULT OTHER")
+    @Enumerated(EnumType.STRING)
+    private Source source;
 }

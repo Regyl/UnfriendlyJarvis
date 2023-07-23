@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Check;
 
 import java.time.LocalDate;
 
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Table(name = "person")
 @EqualsAndHashCode(callSuper = true)
+@Check(constraints = "gender = 'MALE' or gender = 'FEMALE' or gender is null")
 public class Person extends AbstractEntity {
 
     @Column(name = "phone")
@@ -46,5 +48,8 @@ public class Person extends AbstractEntity {
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
+
+    @Column(name = "is_russian")
+    private Boolean isRussian;
 
 }
