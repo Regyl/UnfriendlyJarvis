@@ -1,6 +1,5 @@
 package com.github.regyl.repository;
 
-import com.github.regyl.dto.PasswordContainer;
 import com.github.regyl.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,10 +11,10 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
 
-    Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
 
-    @Query("select u.password from User u where u.username = #{username}")
-    Optional<PasswordContainer> findPasswordByUsername(String username);
+    @Query("select u.password from User u where u.email = :username")
+    Optional<String> findPasswordByUsername(String username);
 }

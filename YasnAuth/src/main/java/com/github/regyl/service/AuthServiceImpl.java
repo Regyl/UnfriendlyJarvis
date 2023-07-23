@@ -2,7 +2,6 @@ package com.github.regyl.service;
 
 import com.github.regyl.api.AuthService;
 import com.github.regyl.api.converter.DefaultConverter;
-import com.github.regyl.dto.PasswordContainer;
 import com.github.regyl.dto.RegistrationDto;
 import com.github.regyl.exceptiion.UserAlreadyExistsException;
 import com.github.regyl.model.User;
@@ -27,14 +26,14 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public boolean isUserExistsByUsername(String username) {
-        return userRepository.existsByUsername(username);
+        return userRepository.existsByEmail(username);
     }
 
-    @Override
+    @Override //TODO Post processor send registration event to MQ
     public void saveNewUser(RegistrationDto registrationDto) {
-        String login = registrationDto.getUsername();
-        if (isUserExistsByUsername(login)) {
-            throw new UserAlreadyExistsException(login);
+        String username = registrationDto.getEmail();
+        if (isUserExistsByUsername(username)) {
+            throw new UserAlreadyExistsException(username);
         }
 
         User newUser = registrationDtoUserDefaultConverter.convert(registrationDto);
@@ -43,15 +42,15 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username).orElseThrow(() ->
+        return userRepository.findByEmail(username).orElseThrow(() ->
                 new UsernameNotFoundException(String.format(USER_NOT_FOUND_MESSAGE, username)));
     }
 
     @Override
     public boolean signIn(String username, String password) {
-        PasswordContainer passwordContainer = userRepository.findPasswordByUsername(username).orElseThrow(() ->
+        String hashedPassword = userRepository.findPasswordByUsername(username).orElseThrow(() ->
                 new UsernameNotFoundException(String.format(USER_NOT_FOUND_MESSAGE, username)));
 
-        return passwordEncoder.matches(password, passwordContainer.getPassword());
+        return passwordEncoder.matches(password, hashedPassword);
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
- * Mock of {@link AuthService} for local testing.
+ * Mock of {@link AuthService} for development testing.
  */
 @Service
 @ConditionalOnMissingBean(AuthServiceImpl.class)

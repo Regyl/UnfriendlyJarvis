@@ -22,13 +22,13 @@ public class AuthController {
     /**
      * Authorize by username/password.
      *
-     * @param login     username
+     * @param username     username
      * @param password  password
-     * @return          flag is credentials valid.
+     * @return          flag are credentials valid.
      */
     @GetMapping("/sign-in")
-    public boolean signIn(@RequestParam("login") @NotEmpty String login, @RequestParam("password") @NotEmpty String password) {
-        return authService.signIn(login, password);
+    public boolean signIn(@RequestParam("username") @NotEmpty String username, @RequestParam("password") @NotEmpty String password) {
+        return authService.signIn(username, password);
     }
 
     /**

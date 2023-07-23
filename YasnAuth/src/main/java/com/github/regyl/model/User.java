@@ -1,6 +1,5 @@
 package com.github.regyl.model;
 
-import com.github.regyl.dto.PasswordContainer;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +15,13 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "user_entity")
 @EqualsAndHashCode(callSuper = true)
-public class User extends AbstractEntity implements UserDetails, PasswordContainer {
+public class User extends AbstractEntity implements UserDetails {
 
-    @Column(name = "username", unique = true)
-    private String username;
+    /**
+     * User's login. Must be optional.
+     */
+    @Column(name = "login", unique = true)
+    private String login;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -36,11 +38,16 @@ public class User extends AbstractEntity implements UserDetails, PasswordContain
     @Column(name = "credentials_expiration_date")
     private LocalDate credentialsExpirationDate;
 
-    @Column(name = "account_non_locked", columnDefinition = "NOT NULL DEFAULT TRUE")
+    @Column(name = "account_non_locked", columnDefinition = "boolean not null default true")
     private boolean accountNonLocked;
 
-    @Column(name = "enabled", columnDefinition = "NOT NULL DEFAULT TRUE")
+    @Column(name = "enabled", columnDefinition = "boolean not null default true")
     private boolean enabled;
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
 
     @Override
     public boolean isAccountNonExpired() {

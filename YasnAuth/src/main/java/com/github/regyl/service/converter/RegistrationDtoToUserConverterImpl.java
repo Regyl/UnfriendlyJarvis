@@ -21,7 +21,7 @@ public class RegistrationDtoToUserConverterImpl extends AbstractNotNullConverter
     public User convertNotNullParam(RegistrationDto source) {
         return User.builder()
                 .email(source.getEmail())
-                .username(source.getUsername())
+                .login(source.getLogin())
                 .password(passwordEncoder.encode(source.getPassword()))
                 .build();
     }

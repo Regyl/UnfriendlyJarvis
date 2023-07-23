@@ -15,8 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RegistrationDto {
 
-    @NotEmpty
-    private String username;
+    private String login;
 
     @Email
     @NotEmpty
