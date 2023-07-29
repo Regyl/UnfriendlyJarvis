@@ -45,8 +45,11 @@ tasks.withType<Test> {
 }
 
 jib {
+    from {
+        image = "eclipse-temurin:17-jre"
+    }
     to {
-        image = "registry.hub.docker.com/regyl/social-network-config"
+        image = "registry.hub.docker.com/regyl/yasn-cloud-config"
         auth {
             username = System.getenv("DockerHubLogin")
             password = System.getenv("DockerHubPassword")
