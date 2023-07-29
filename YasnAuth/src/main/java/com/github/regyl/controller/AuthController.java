@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/password-based")
+@RequestMapping("/basic")
 public class AuthController {
 
     private final AuthService authService;
@@ -22,7 +22,7 @@ public class AuthController {
     /**
      * Authorize by username/password.
      *
-     * @param username     username
+     * @param username  username
      * @param password  password
      * @return          flag are credentials valid.
      */
@@ -32,7 +32,7 @@ public class AuthController {
     }
 
     /**
-     * Create new user.
+     * Creates new user.
      *
      * @param registrationDto DTO with information about new user
      */

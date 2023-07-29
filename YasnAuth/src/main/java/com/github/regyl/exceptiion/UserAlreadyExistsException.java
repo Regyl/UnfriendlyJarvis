@@ -1,6 +1,8 @@
 package com.github.regyl.exceptiion;
 
-public class UserAlreadyExistsException extends RuntimeException {
+import org.springframework.security.core.AuthenticationException;
+
+public class UserAlreadyExistsException extends AuthenticationException {
 
     private static final String PREFIX = "User already exists exception: ";
 
