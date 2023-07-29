@@ -1,10 +1,12 @@
 package com.github.regyl.service;
 
+import com.github.regyl.annotation.BusinessEvent;
 import com.github.regyl.api.AuthService;
 import com.github.regyl.api.converter.DefaultConverter;
 import com.github.regyl.dto.RegistrationDto;
 import com.github.regyl.exceptiion.UserAlreadyExistsException;
 import com.github.regyl.model.User;
+import com.github.regyl.model.enums.EventType;
 import com.github.regyl.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -13,6 +15,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service for simple username & password - based authentication.
+ */
 @Service
 @RequiredArgsConstructor
 @ConditionalOnProperty(prefix = "application.security", name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -29,7 +34,8 @@ public class AuthServiceImpl implements AuthService {
         return userRepository.existsByEmail(username);
     }
 
-    @Override //TODO Post processor send registration event to MQ
+    @Override
+    @BusinessEvent(type = EventType.REGISTRATION)
     public void saveNewUser(RegistrationDto registrationDto) {
         String username = registrationDto.getEmail();
         if (isUserExistsByUsername(username)) {

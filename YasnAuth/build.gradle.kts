@@ -1,18 +1,17 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.0.2"
-	id("io.spring.dependency-management") version "1.1.2"
-
 	jacoco
 
+	id("org.springframework.boot") version "3.0.2"
+	id("io.spring.dependency-management") version "1.1.2"
+	id("checkstyle")
+
+	id("com.google.cloud.tools.jib") version "3.3.1"
 }
 
 group = "com.github.regyl"
 version = "0.0.1"
-
-java {
-	sourceCompatibility = JavaVersion.VERSION_17
-}
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 jacoco {
 	toolVersion = "0.8.9"
@@ -35,6 +34,7 @@ extra["testcontainersVersion"] = "1.17.6"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
@@ -74,4 +74,17 @@ tasks.test {
 }
 tasks.jacocoTestReport {
 	dependsOn(tasks.test) // tests are required to run before generating the report
+}
+
+jib {
+	from {
+		image = "eclipse-temurin:17-jre"
+	}
+	to {
+		image = "registry.hub.docker.com/regyl/yasn-auth"
+		auth {
+			username = System.getenv("DockerHubLogin")
+			password = System.getenv("DockerHubPassword")
+		}
+	}
 }

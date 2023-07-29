@@ -1,6 +1,7 @@
 package com.github.regyl.config;
 
 import com.github.regyl.exceptiion.UserAlreadyExistsException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,12 +13,16 @@ import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     public Map<String, Object> handleRuntimeException(RuntimeException e) {
+        log.error("RuntimeException", e);
+        e.printStackTrace();
+
         Map<String, Object> body = new HashMap<>(5, 1);
         body.put("message", e.getMessage());
         body.put("timestamp", OffsetDateTime.now(Clock.systemUTC()));
@@ -39,14 +44,16 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UserAlreadyExistsException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.FOUND)
     public Map<String, Object> handleUserAlreadyExistsException(UserAlreadyExistsException e) {
+        log.warn("UserAlreadyExistsException", e);
         return buildResponseFromException(e);
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public Map<String, Object> handleUsernameNotFoundException(UsernameNotFoundException e) {
+        log.warn("UsernameNotFoundException", e);
         return buildResponseFromException(e);
     }
 

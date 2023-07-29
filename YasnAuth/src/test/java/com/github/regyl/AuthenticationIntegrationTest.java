@@ -35,7 +35,7 @@ public class AuthenticationIntegrationTest extends TestcontainersConfig {
     @Test
     void signUpShouldReturnCreated() throws Exception {
         RegistrationDto registrationDto = new RegistrationDto("test-login", "test@gmail.com", "testpassword");
-        mockMvc.perform(post("/password-based/sign-up")
+        mockMvc.perform(post("/basic/sign-up")
                         .content(OBJECT_MAPPER.writeValueAsString(registrationDto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
@@ -49,7 +49,7 @@ public class AuthenticationIntegrationTest extends TestcontainersConfig {
 
         MvcResult mvcResult = signUp(email, password);
 
-        assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.FOUND.value());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class AuthenticationIntegrationTest extends TestcontainersConfig {
 
         MvcResult mvcResult = signIn(email, password);
 
-        assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.FORBIDDEN.value());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class AuthenticationIntegrationTest extends TestcontainersConfig {
     }
 
     MvcResult signIn(String username, String password) throws Exception {
-        return mockMvc.perform(get("/password-based/sign-in")
+        return mockMvc.perform(get("/basic/sign-in")
                         .param("username", username)
                         .param("password", password))
                 .andReturn();
@@ -90,7 +90,7 @@ public class AuthenticationIntegrationTest extends TestcontainersConfig {
                 .password(password)
                 .build();
 
-        return mockMvc.perform(post("/password-based/sign-up")
+        return mockMvc.perform(post("/basic/sign-up")
                 .content(OBJECT_MAPPER.writeValueAsString(registrationDto))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
