@@ -4,7 +4,7 @@ plugins {
 
 	id("org.springframework.boot") version "3.0.2"
 	id("io.spring.dependency-management") version "1.1.2"
-	id("checkstyle")
+//	id("checkstyle")
 
 	id("com.google.cloud.tools.jib") version "3.3.1"
 }
@@ -31,25 +31,30 @@ repositories {
 
 extra["springCloudVersion"] = "2022.0.1"
 extra["testcontainersVersion"] = "1.17.6"
+extra["mapstructVersion"] = "1.5.5.Final"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
 	implementation("org.postgresql:postgresql:42.6.0")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-	implementation("org.springframework.boot:spring-boot-starter-security")
-	//implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
-	implementation("org.springframework.boot:spring-boot-starter-validation")
-	implementation("org.mapstruct:mapstruct:1.5.5.Final")
-
+	implementation("org.apache.commons:commons-lang3:3.13.0")
+	implementation("org.apache.commons:commons-collections4:4.4")
 
 	compileOnly("org.projectlombok:lombok")
+	compileOnly("org.mapstruct:mapstruct:${property("mapstructVersion")}")
 	annotationProcessor("org.projectlombok:lombok")
+	annotationProcessor("org.mapstruct:mapstruct-processor:${property("mapstructVersion")}")
+	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
 	testImplementation("org.projectlombok:lombok")
 	testImplementation("org.assertj:assertj-core:3.24.2")

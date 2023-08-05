@@ -1,6 +1,7 @@
 package com.github.regyl.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -23,10 +24,11 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "login", unique = true)
     private String login;
 
+    @Email
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
