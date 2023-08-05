@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @BusinessEvent(type = EventType.REGISTRATION)
-    public void saveNewUser(RegistrationDto registrationDto) {
+    public void signUp(RegistrationDto registrationDto) {
         String username = registrationDto.getEmail();
         if (isUserExistsByUsername(username)) {
             throw new UserAlreadyExistsException(username);

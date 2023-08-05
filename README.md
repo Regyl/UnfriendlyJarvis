@@ -17,3 +17,14 @@ This is my pet-project directed to learn such technologies, as:
 
 # Idk
 - I want an achievement system
+
+# TODO
+- JWT-tokens
+- Email verification
+- Business-valued email sending on registration
+- Maybe store all user's ip addresses to notify if it sing in from strange device
+- send suspect notification to account owner on throwing exception during sign-in 
+- Store known user hosts in Auth module and send notification on suspect log in [datatypes for network](https://www.postgresql.org/docs/current/datatype-net-types.html)
+
+
+https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps

@@ -21,7 +21,7 @@ public interface AuthService extends UserDetailsService {
      *
      * @param registrationDto DTO with user's information
      */
-    void saveNewUser(RegistrationDto registrationDto);
+    void signUp(RegistrationDto registrationDto);
 
     /**
      * Validate credentials.

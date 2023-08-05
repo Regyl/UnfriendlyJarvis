@@ -39,6 +39,6 @@ public class AuthController {
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
     public void signUp(@RequestBody @NotNull @Valid RegistrationDto registrationDto) {
-        authService.saveNewUser(registrationDto);
+        authService.signUp(registrationDto);
     }
 }

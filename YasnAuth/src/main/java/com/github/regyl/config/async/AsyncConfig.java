@@ -1,6 +1,6 @@
 package com.github.regyl.config.async;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -13,13 +13,10 @@ import java.util.concurrent.Executor;
  */
 @EnableAsync
 @Configuration
-@RequiredArgsConstructor
 public class AsyncConfig {
 
-    private final AsyncConfigProperties asyncConfigProperties;
-
     @Bean("defaultAsyncExecutor")
-    public Executor backgroundExecutor() {
+    public Executor backgroundExecutor(AsyncConfigProperties asyncConfigProperties) {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(asyncConfigProperties.getCorePoolSize());
         executor.setMaxPoolSize(asyncConfigProperties.getMaxPoolSize());
@@ -30,4 +27,10 @@ public class AsyncConfig {
         executor.initialize();
         return executor;
     }
+
+    @Bean("defaultAsyncUncaughtExceptionHandler")
+    public AsyncUncaughtExceptionHandler asyncUncaughtExceptionHandler() {
+        return new DefaultAsyncUncaughtExceptionHandlerImpl();
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.github.regyl.config;
 
 import com.github.regyl.exceptiion.UserAlreadyExistsException;
+import feign.FeignException;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,6 +18,11 @@ import java.util.Map;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    /**
+     * When connection wasn't established, feign causes error with status below.
+     */
+    private static final int NO_CONNECTION_FEIGN_EXCEPTION_STATUS = -1;
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
@@ -54,6 +61,17 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public Map<String, Object> handleUsernameNotFoundException(UsernameNotFoundException e) {
         log.warn("UsernameNotFoundException", e);
+        return buildResponseFromException(e);
+    }
+
+    @ExceptionHandler(FeignException.class)
+    public Map<String, Object> handleFeignException(FeignException e, HttpServletResponse servletResponse) {
+        if (NO_CONNECTION_FEIGN_EXCEPTION_STATUS != e.status()) {
+            servletResponse.setStatus(e.status());
+        } else {
+            servletResponse.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
+        }
+
         return buildResponseFromException(e);
     }
 

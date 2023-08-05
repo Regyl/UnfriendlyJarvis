@@ -34,7 +34,11 @@ public class SecurityConfig {
         /*http.authorizeRequests()
                 .anyRequest().authenticated()
                 .and().httpBasic();*/
-        http.cors().disable().csrf().disable().authorizeRequests().anyRequest().permitAll();
+        http
+                .cors().disable()
+                .csrf().disable()
+                .authorizeRequests().anyRequest()
+                .permitAll();
         return http.build();
     }
 }

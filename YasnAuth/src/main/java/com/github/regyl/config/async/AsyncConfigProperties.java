@@ -1,6 +1,7 @@
 package com.github.regyl.config.async;
 
 import lombok.Data;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,11 +11,18 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "application.async")
-public class AsyncConfigProperties {
+public class AsyncConfigProperties implements InitializingBean {
 
-    private int corePoolSize = Runtime.getRuntime().availableProcessors() / 10 + 1;
+    private int corePoolSize;
 
     private int maxPoolSize = 5;
 
     private int queueCapacity = 500;
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        if (corePoolSize == 0) {
+            corePoolSize = Math.max(Runtime.getRuntime().availableProcessors() / 10, 1);
+        }
+    }
 }

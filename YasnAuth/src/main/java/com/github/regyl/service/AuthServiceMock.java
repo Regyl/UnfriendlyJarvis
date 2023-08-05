@@ -21,7 +21,7 @@ public class AuthServiceMock implements AuthService {
     }
 
     @Override
-    public void saveNewUser(RegistrationDto registrationDto) {
+    public void signUp(RegistrationDto registrationDto) {
 
     }
 
