@@ -1,7 +1,7 @@
 package com.github.regyl.service;
 
 import com.github.regyl.annotation.BusinessEvent;
-import com.github.regyl.annotation.ConvertableEvent;
+import com.github.regyl.api.ConvertableEvent;
 import com.github.regyl.api.converter.EventConverter;
 import com.github.regyl.dto.EventDto;
 import com.github.regyl.utils.AspectUtils;
@@ -29,12 +29,24 @@ public class BusinessEventPublisher<T extends ConvertableEvent> {
 
     private final Map<Class<T>, EventConverter<T>> eventConverterMap;
 
+    /**
+     * Constructor.
+     *
+     * @param eventConverters list of event converters
+     */
     public BusinessEventPublisher(List<EventConverter<T>> eventConverters) {
         this.eventConverterMap = eventConverters.stream()
                 .collect(Collectors.toUnmodifiableMap(
                         EventConverter::getSupportedClass, Function.identity()));
     }
 
+    /**
+     * Publish event.
+     *
+     * @param jp                join point
+     * @param businessEvent     annotation with event type
+     * @param convertableEvent  event DTO
+     */
     @Async("defaultAsyncExecutor")
     @AfterReturning(value = "@annotation(businessEvent) && args(convertableEvent,..)", argNames = "jp,businessEvent,convertableEvent")
     public void handleEvent(JoinPoint jp, BusinessEvent businessEvent, ConvertableEvent convertableEvent) {

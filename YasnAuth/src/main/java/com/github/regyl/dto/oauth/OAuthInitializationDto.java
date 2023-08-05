@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * DTO with information to initialize OAuth 2.0 authorization.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,8 +17,7 @@ public class OAuthInitializationDto {
 
     @NotEmpty
     private String code;
-
-    @NotEmpty
+    
     private String state;
 
     @NotNull

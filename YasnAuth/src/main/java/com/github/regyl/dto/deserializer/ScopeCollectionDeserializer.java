@@ -1,4 +1,4 @@
-package com.github.regyl;
+package com.github.regyl.dto.deserializer;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 
+/**
+ * Deserializer for {@link Scope} collection.
+ */
 public class ScopeCollectionDeserializer extends JsonDeserializer<Collection<Scope>> {
 
     private static final String DELIMITER = ",";

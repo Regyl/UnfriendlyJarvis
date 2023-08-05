@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * Dto which contains information about happened event
+ * DTO which contains information about happened event
  */
 @Data
 @NoArgsConstructor

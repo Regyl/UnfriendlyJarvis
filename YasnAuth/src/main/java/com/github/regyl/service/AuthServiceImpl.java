@@ -2,7 +2,7 @@ package com.github.regyl.service;
 
 import com.github.regyl.annotation.BusinessEvent;
 import com.github.regyl.api.AuthService;
-import com.github.regyl.api.converter.DefaultConverter;
+import com.github.regyl.api.converter.RegistrationDtoMapper;
 import com.github.regyl.dto.RegistrationDto;
 import com.github.regyl.exceptiion.UserAlreadyExistsException;
 import com.github.regyl.model.User;
@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- * Service for simple username & password - based authentication.
+ * Service for simple username & password based authorization.
  */
 @Service
 @RequiredArgsConstructor
@@ -27,7 +27,7 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final DefaultConverter<RegistrationDto, User> registrationDtoUserDefaultConverter;
+    private final RegistrationDtoMapper registrationDtoMapper;
 
     @Override
     public boolean isUserExistsByUsername(String username) {
@@ -42,7 +42,7 @@ public class AuthServiceImpl implements AuthService {
             throw new UserAlreadyExistsException(username);
         }
 
-        User newUser = registrationDtoUserDefaultConverter.convert(registrationDto);
+        User newUser = registrationDtoMapper.convert(registrationDto);
         userRepository.save(newUser);
     }
 

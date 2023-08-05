@@ -13,7 +13,7 @@ public interface DefaultConverter<T, S> {
     /**
      * Convert from source {@link T} to target type {@link S}.
      *
-     * @param source {@link T} dto
+     * @param source {@link T} DTO
      * @return {@link S} target entity
      */
     S convert(@NotNull T source);

@@ -4,7 +4,7 @@ plugins {
 
 	id("org.springframework.boot") version "3.0.2"
 	id("io.spring.dependency-management") version "1.1.2"
-//	id("checkstyle")
+	id("checkstyle")
 
 	id("com.google.cloud.tools.jib") version "3.3.1"
 }
@@ -15,7 +15,20 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 jacoco {
 	toolVersion = "0.8.9"
-	reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
+	reportsDirectory.set(layout.buildDirectory.dir("reports/customJacocoReportDir"))
+}
+
+jib {
+	from {
+		image = "eclipse-temurin:17-jre"
+	}
+	to {
+		image = "registry.hub.docker.com/regyl/yasn-auth"
+		auth {
+			username = System.getenv("DockerHubLogin")
+			password = System.getenv("DockerHubPassword")
+		}
+	}
 }
 
 configurations {
@@ -80,16 +93,6 @@ tasks.test {
 tasks.jacocoTestReport {
 	dependsOn(tasks.test) // tests are required to run before generating the report
 }
-
-jib {
-	from {
-		image = "eclipse-temurin:17-jre"
-	}
-	to {
-		image = "registry.hub.docker.com/regyl/yasn-auth"
-		auth {
-			username = System.getenv("DockerHubLogin")
-			password = System.getenv("DockerHubPassword")
-		}
-	}
+tasks.jib {
+	dependsOn(tasks.test, tasks.checkstyleMain, tasks.checkstyleTest)
 }

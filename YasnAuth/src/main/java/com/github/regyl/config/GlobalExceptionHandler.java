@@ -15,6 +15,9 @@ import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Rest controllers exception handler.
+ */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -23,7 +26,13 @@ public class GlobalExceptionHandler {
      * When connection wasn't established, feign causes error with status below.
      */
     private static final int NO_CONNECTION_FEIGN_EXCEPTION_STATUS = -1;
-
+    
+    /**
+     * Handle the rest exceptions.
+     *
+     * @param e unhandled runtime exception
+     * @return  exception information
+     */
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     public Map<String, Object> handleRuntimeException(RuntimeException e) {
@@ -50,6 +59,12 @@ public class GlobalExceptionHandler {
         return body;
     }
 
+    /**
+     * Handle the user already exists exception.
+     *
+     * @param e user already exists exception
+     * @return  exception information
+     */
     @ExceptionHandler(UserAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.FOUND)
     public Map<String, Object> handleUserAlreadyExistsException(UserAlreadyExistsException e) {
@@ -57,6 +72,12 @@ public class GlobalExceptionHandler {
         return buildResponseFromException(e);
     }
 
+    /**
+     * Handle the user not found exception.
+     *
+     * @param e username not found exception
+     * @return  exception information
+     */
     @ExceptionHandler(UsernameNotFoundException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public Map<String, Object> handleUsernameNotFoundException(UsernameNotFoundException e) {
@@ -64,6 +85,15 @@ public class GlobalExceptionHandler {
         return buildResponseFromException(e);
     }
 
+    /**
+     * Handle the feign exceptions.
+     * <p>
+     * response status is transferred from feign exception
+     *
+     * @param e                 feign exception
+     * @param servletResponse   servlet response
+     * @return                  exception information
+     */
     @ExceptionHandler(FeignException.class)
     public Map<String, Object> handleFeignException(FeignException e, HttpServletResponse servletResponse) {
         if (NO_CONNECTION_FEIGN_EXCEPTION_STATUS != e.status()) {

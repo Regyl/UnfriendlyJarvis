@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
+/**
+ * Application's start point.
+ */
 @SpringBootApplication
 @EnableAspectJAutoProxy
 @EnableConfigurationProperties

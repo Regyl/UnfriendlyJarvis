@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Username & password-based authentication.
+ * Basic username & password authorization.
  */
 @RestController
 @RequiredArgsConstructor
@@ -24,7 +24,7 @@ public class AuthController {
      *
      * @param username  username
      * @param password  password
-     * @return          flag are credentials valid.
+     * @return          flag are credentials valid
      */
     @GetMapping("/sign-in")
     public boolean signIn(@RequestParam("username") @NotEmpty String username, @RequestParam("password") @NotEmpty String password) {
