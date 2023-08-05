@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Implementation of {@link OAuthService} for GitHub service.
+ * Implementation of {@link OAuthService} for GitHub.
  */
 @Slf4j
 @Service
@@ -27,7 +27,15 @@ public class OAuthGitHubServiceImpl implements OAuthService {
     private final GitHubConverter gitHubConverter;
     private final AuthService authService;
     private final OAuthAccessTokenAcquirer oAuthAccessTokenAcquirer;
-
+    
+    /**
+     * Constructor.
+     *
+     * @param gitHubFeignClient         {@link GitHubFeignClient} for GitHub API.
+     * @param gitHubConverter           {@link GitHubConverter} for converting DTOs.
+     * @param authService               {@link AuthService} for user management.
+     * @param oAuthAccessTokenAcquirers {@link OAuthAccessTokenAcquirer} for acquiring access token.
+     */
     public OAuthGitHubServiceImpl(GitHubFeignClient gitHubFeignClient, GitHubConverter gitHubConverter, AuthService authService, List<OAuthAccessTokenAcquirer> oAuthAccessTokenAcquirers) {
         this.gitHubFeignClient = gitHubFeignClient;
         this.gitHubConverter = gitHubConverter;

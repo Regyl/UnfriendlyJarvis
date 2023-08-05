@@ -9,6 +9,9 @@ import java.time.Clock;
 import java.time.LocalDate;
 import java.util.Set;
 
+/**
+ * User entity.
+ */
 @Data
 @Entity
 @Builder
@@ -16,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "user_entity")
 @EqualsAndHashCode(callSuper = true)
-public class User extends AbstractEntity implements UserDetails {
+public class User extends AbstractEntity implements OAuthUserDetails, UserDetails {
 
     /**
      * User's login. Must be optional.
@@ -33,6 +36,12 @@ public class User extends AbstractEntity implements UserDetails {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Authority> authorities;
+    
+    /**
+     * To support OAuth 2.0 authorization.
+     */
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<ScopeEntity> scopes;
 
     @Column(name = "expiration_date")
     private LocalDate expirationDate;
@@ -50,7 +59,7 @@ public class User extends AbstractEntity implements UserDetails {
     public String getUsername() {
         return email;
     }
-
+    
     @Override
     public boolean isAccountNonExpired() {
         return isDateNonExpired(expirationDate);

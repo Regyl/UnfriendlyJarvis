@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * OAuth 2.0 configuration properties.
+ */
 @Slf4j(topic = "OAuthConfigProperties")
 @Data
 @Configuration
@@ -21,10 +24,13 @@ public class OAuthConfigProperties implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         if (MapUtils.isEmpty(providers)) {
-            log.warn("OAuth providers not set");
+            log.warn("OAuth 2.0 providers not set");
         }
     }
 
+    /**
+     * OAuth 2.0 client properties.
+     */
     @Data
     public static class OAuthClientProperties {
 

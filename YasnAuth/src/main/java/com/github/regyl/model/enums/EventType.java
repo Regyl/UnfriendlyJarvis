@@ -1,7 +1,7 @@
 package com.github.regyl.model.enums;
 
 /**
- * Business event type.
+ * Business event types.
  */
 public enum EventType {
 

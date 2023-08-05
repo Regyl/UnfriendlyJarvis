@@ -13,7 +13,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Slf4j
 @NoArgsConstructor
 public class DiscardOldestRejectedExecutionHandler implements RejectedExecutionHandler {
-
+    
+    @Override
     public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
         Runnable dropped = e.getQueue().poll();
         if (dropped instanceof Future<?>) {

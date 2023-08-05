@@ -1,28 +1,28 @@
 package com.github.regyl.api.converter;
 
-import com.github.regyl.annotation.ConvertableEvent;
+import com.github.regyl.api.ConvertableEvent;
 import com.github.regyl.dto.EventDto;
 import jakarta.validation.constraints.NotNull;
 
 /**
- * Dtos converter to {@link EventDto}.
+ * DTOs converter to {@link EventDto}.
  *
- * @param <T> target dto
+ * @param <T> target DTO
  */
 public interface EventConverter<T extends ConvertableEvent> {
 
     /**
-     * Get target dto type.
+     * Get target DTO type.
      *
-     * @return dto type
+     * @return DTO type
      */
     Class<T> getSupportedClass();
 
     /**
-     * Convert target dto to {@link EventDto}.
+     * Convert target DTO to {@link EventDto}.
      *
      * @param   dto target
-     * @return  dto with info about event
+     * @return  DTO with info about event
      */
     EventDto convert(@NotNull T dto);
 }

@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * DTO to request GitHub access token.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

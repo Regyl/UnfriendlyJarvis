@@ -25,6 +25,7 @@ This is my pet-project directed to learn such technologies, as:
 - Maybe store all user's ip addresses to notify if it sing in from strange device
 - send suspect notification to account owner on throwing exception during sign-in 
 - Store known user hosts in Auth module and send notification on suspect log in [datatypes for network](https://www.postgresql.org/docs/current/datatype-net-types.html)
+- Move to scalable id [generation](https://medium.com/double-pointer/system-design-interview-scalable-unique-id-generator-twitter-snowflake-or-a-similar-service-18af22d74343)
 
 
 https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps

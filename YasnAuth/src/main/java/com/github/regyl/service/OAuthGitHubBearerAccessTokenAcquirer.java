@@ -11,6 +11,11 @@ import com.github.regyl.model.enums.OAuthProviderType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation for acquiring GitHub <a href="https://oauth.net/2/bearer-tokens/">bearer</a> token.
+ * <p>
+ * See also GitHub <a href="https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps">OAuth documentation</a>.
+ */
 @Service
 @RequiredArgsConstructor
 public class OAuthGitHubBearerAccessTokenAcquirer implements OAuthAccessTokenAcquirer {

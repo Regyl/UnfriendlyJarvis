@@ -1,6 +1,6 @@
 package com.github.regyl.dto;
 
-import com.github.regyl.annotation.ConvertableEvent;
+import com.github.regyl.api.ConvertableEvent;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RegistrationDto implements ConvertableEvent {
 
+    @Pattern(regexp = "^[^@]{3,}$")
     private String login;
 
     @Email

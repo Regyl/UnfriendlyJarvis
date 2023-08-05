@@ -9,12 +9,18 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.Executor;
 
 /**
- * Initialization of default async task executor.
+ * Initialization of default async task executor and async exception handler.
  */
 @EnableAsync
 @Configuration
 public class AsyncConfig {
-
+    
+    /**
+     * Initialize default async task executor of type {@link ThreadPoolTaskExecutor}.
+     *
+     * @param asyncConfigProperties async config properties.
+     * @return                      default async task executor.
+     */
     @Bean("defaultAsyncExecutor")
     public Executor backgroundExecutor(AsyncConfigProperties asyncConfigProperties) {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
@@ -27,7 +33,12 @@ public class AsyncConfig {
         executor.initialize();
         return executor;
     }
-
+    
+    /**
+     * Initialize default async uncaught exception handler of type {@link AsyncUncaughtExceptionHandler}.
+     *
+     * @return default async uncaught exception handler.
+     */
     @Bean("defaultAsyncUncaughtExceptionHandler")
     public AsyncUncaughtExceptionHandler asyncUncaughtExceptionHandler() {
         return new DefaultAsyncUncaughtExceptionHandlerImpl();

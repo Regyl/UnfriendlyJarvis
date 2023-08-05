@@ -12,6 +12,9 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * Converter for GitHub request & response DTOs.
+ */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public abstract class GitHubConverter {
 
@@ -19,8 +22,13 @@ public abstract class GitHubConverter {
 
     @Autowired
     protected OAuthConfigProperties oAuthConfigProperties;
-
-
+    
+    /**
+     * Convert OAuth authorization initialization DTO to access token request DTO.
+     *
+     * @param initializationDto dto with information to initialize OAuth 2.0 authorization
+     * @return                  DTO to request GitHub access token
+     */
     @Mappings({
             @Mapping(target = "clientId", expression = """
                     java(oAuthConfigProperties.getProviders()
@@ -42,6 +50,12 @@ public abstract class GitHubConverter {
                     """),
     })
     public abstract AccessTokenRequestDto convert(OAuthInitializationDto initializationDto);
-
+    
+    /**
+     * Convert user info to internal application DTO.
+     *
+     * @param userInfoDto   dto with GitHub user's information
+     * @return              DTO used to transfer information about user that should be created
+     */
     public abstract RegistrationDto convert(UserInfoDto userInfoDto);
 }

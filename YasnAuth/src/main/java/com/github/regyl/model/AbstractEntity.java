@@ -15,6 +15,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+/**
+ * Abstract entity.
+ * <p>
+ * This class is used to provide common fields to all entities. Default id type is {@link UUID}.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +27,7 @@ import java.util.UUID;
 @OnDelete(action = OnDeleteAction.CASCADE)
 public abstract class AbstractEntity {
 
+    //TODO change to custom scalable generator
     @Id
     @GeneratedValue
     private UUID id;
