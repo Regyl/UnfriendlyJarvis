@@ -19,4 +19,4 @@ services:
     environment:
       POSTGRES_USER: 'idk_user'
       POSTGRES_PASSWORD: 'SomeUselessPassword02'
-      POSTGRES_DB: 'yasn'
+      POSTGRES_DB: 'uj'
