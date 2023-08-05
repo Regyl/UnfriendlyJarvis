@@ -3,11 +3,11 @@ package com.regyl.yetanothersocialnetworkcore.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Check;
 
 @Data
 @Entity
@@ -15,10 +15,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "account")
 @EqualsAndHashCode(callSuper = true)
+@Check(constraints = "login is not null or email is not null")
 public class Account extends AbstractEntity {
 
-    @NotNull
-    @Column(name = "email", nullable = false)
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "email")
     private String email;
 
     @Column(name = "password")

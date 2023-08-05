@@ -81,3 +81,16 @@ tasks.test {
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
 }
+
+jib {
+    from {
+        image = "eclipse-temurin:17-jre"
+    }
+    to {
+        image = "registry.hub.docker.com/regyl/yasn-core"
+        auth {
+            username = System.getenv("DockerHubLogin")
+            password = System.getenv("DockerHubPassword")
+        }
+    }
+}
