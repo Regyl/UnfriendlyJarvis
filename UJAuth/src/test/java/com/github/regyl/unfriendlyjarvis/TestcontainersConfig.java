@@ -9,6 +9,9 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+/**
+ * Configuration for integration tests with PostgreSQL docker container.
+ */
 @SpringBootTest
 @Testcontainers
 @AutoConfigureMockMvc(addFilters = false)

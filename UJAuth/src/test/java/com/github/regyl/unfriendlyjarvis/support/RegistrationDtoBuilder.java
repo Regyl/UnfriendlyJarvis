@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
+/**
+ * Generated builder for {@link RegistrationDto}.
+ */
 public final class RegistrationDtoBuilder {
     private @NotEmpty String username;
     private @Email @NotEmpty String email;
@@ -31,7 +34,12 @@ public final class RegistrationDtoBuilder {
         this.password = password;
         return this;
     }
-
+    
+    /**
+     * Build {@link RegistrationDto}.
+     *
+     * @return DTO used to transfer information about user that should be created
+     */
     public RegistrationDto build() {
         RegistrationDto registrationDto = new RegistrationDto();
         registrationDto.setLogin(username);

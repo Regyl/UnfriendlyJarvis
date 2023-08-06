@@ -1,8 +1,16 @@
 package com.github.regyl.unfriendlyjarvis.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Clock;
@@ -71,7 +79,7 @@ public class User extends AbstractEntity implements OAuthUserDetails, UserDetail
     }
 
     private boolean isDateNonExpired(LocalDate date) {
-        return date == null ?
-                Boolean.TRUE : LocalDate.now(Clock.systemUTC()).isBefore(date);
+        return date == null ? Boolean.TRUE
+                : LocalDate.now(Clock.systemUTC()).isBefore(date);
     }
 }

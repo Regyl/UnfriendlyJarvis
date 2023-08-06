@@ -19,6 +19,6 @@ public interface GitHubOAuthFeignClient {
      * @param requestDto    DTO to request GitHub access token
      * @return              DTO with user's access token and allowed scopes
      */
-    @PostMapping(value = "/access_token", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/access_token", consumes = MediaType.APPLICATION_JSON_VALUE)
     AccessTokenResponseDto getAccessToken(@RequestBody AccessTokenRequestDto requestDto);
 }

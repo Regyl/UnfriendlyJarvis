@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Implementation for acquiring GitHub <a href="https://oauth.net/2/bearer-tokens/">bearer</a> token.
+ *
  * <p>
  * See also GitHub <a href="https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps">OAuth documentation</a>.
  */
@@ -27,15 +28,16 @@ public class OAuthGitHubBearerAccessTokenAcquirer implements OAuthAccessTokenAcq
 
     @Override
     public String acquire(OAuthInitializationDto initializationDto) {
-        AccessTokenRequestDto accessTokenRequestDto = gitHubConverter.convert(initializationDto);
-        AccessTokenResponseDto accessTokenResponseDto = gitHubOAuthFeignClient.getAccessToken(accessTokenRequestDto);
-        if (!DEFAULT_TOKEN_TYPE.equalsIgnoreCase(accessTokenResponseDto.getTokenType())) {
+        AccessTokenRequestDto requestDto = gitHubConverter.convert(initializationDto);
+        AccessTokenResponseDto responseDto = gitHubOAuthFeignClient.getAccessToken(requestDto);
+        
+        if (!DEFAULT_TOKEN_TYPE.equalsIgnoreCase(responseDto.getTokenType())) {
             String exMessage = String.format("OAuth through service %s currently unavailable",
                     initializationDto.getOAuthProviderType().name());
             throw new JarvisException(exMessage);
         }
 
-        return String.join(" ", DEFAULT_TOKEN_TYPE, accessTokenResponseDto.getAccessToken());
+        return String.join(" ", DEFAULT_TOKEN_TYPE, responseDto.getAccessToken());
     }
 
     @Override

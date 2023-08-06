@@ -87,8 +87,9 @@ public class GlobalExceptionHandler {
 
     /**
      * Handle the feign exceptions.
+     *
      * <p>
-     * response status is transferred from feign exception
+     * Response status is transferred from feign exception
      *
      * @param e                 feign exception
      * @param servletResponse   servlet response

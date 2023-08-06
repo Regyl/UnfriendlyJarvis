@@ -15,6 +15,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Integration tests for basic authorization.
+ */
 public class AuthenticationIntegrationTest extends TestcontainersConfig {
 
     static final String PASSWORD_SEQUENCE = "AAAAAAAAA";

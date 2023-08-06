@@ -1,7 +1,11 @@
 package com.github.regyl.unfriendlyjarvis.model;
 
 import com.github.regyl.unfriendlyjarvis.model.enums.AuthorityEnum;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;

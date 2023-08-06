@@ -7,7 +7,13 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Basic username & password authorization.
@@ -27,7 +33,8 @@ public class AuthController {
      * @return          flag are credentials valid
      */
     @GetMapping("/sign-in")
-    public boolean signIn(@RequestParam("username") @NotEmpty String username, @RequestParam("password") @NotEmpty String password) {
+    public boolean signIn(@RequestParam("username") @NotEmpty String username,
+                          @RequestParam("password") @NotEmpty String password) {
         return authService.signIn(username, password);
     }
 
