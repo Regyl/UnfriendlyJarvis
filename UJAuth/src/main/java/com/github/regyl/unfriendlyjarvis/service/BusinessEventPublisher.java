@@ -48,12 +48,18 @@ public class BusinessEventPublisher<T extends ConvertableEvent> {
      * @param convertableEvent  event DTO
      */
     @Async("defaultAsyncExecutor")
-    @AfterReturning(value = "@annotation(businessEvent) && args(convertableEvent,..)", argNames = "jp,businessEvent,convertableEvent")
-    public void handleEvent(JoinPoint jp, BusinessEvent businessEvent, ConvertableEvent convertableEvent) {
-        log.debug("Event publisher called from {} with arguments {}", AspectUtils.getMethodName(jp), Arrays.toString(jp.getArgs()));
+    @AfterReturning(value = "@annotation(businessEvent) && args(convertableEvent,..)",
+            argNames = "jp,businessEvent,convertableEvent")
+    public void handleEvent(JoinPoint jp,
+                            BusinessEvent businessEvent,
+                            ConvertableEvent convertableEvent) {
+        log.debug("Event publisher called from {} with arguments {}",
+                AspectUtils.getMethodName(jp), Arrays.toString(jp.getArgs()));
+        
         EventConverter<T> eventConverter = eventConverterMap.get(convertableEvent.getClass());
         if (eventConverter == null) {
-            log.warn("Event converter for class type {} is not present, skipping", convertableEvent.getClass().getSimpleName());
+            log.warn("Event converter for class type {} is not present, skipping",
+                    convertableEvent.getClass().getSimpleName());
             return;
         }
 

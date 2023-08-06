@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Converter from {@link RegistrationDto} to {@link User} entity.
+ *
  * <p>
  * Also encodes password.
  */

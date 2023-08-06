@@ -17,6 +17,7 @@ import java.util.UUID;
 
 /**
  * Abstract entity.
+ *
  * <p>
  * This class is used to provide common fields to all entities. Default id type is {@link UUID}.
  */

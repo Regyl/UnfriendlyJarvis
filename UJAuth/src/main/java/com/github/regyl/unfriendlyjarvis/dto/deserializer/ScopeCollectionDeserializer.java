@@ -1,6 +1,5 @@
 package com.github.regyl.unfriendlyjarvis.dto.deserializer;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -19,7 +18,8 @@ public class ScopeCollectionDeserializer extends JsonDeserializer<Collection<Sco
     private static final String DELIMITER = ",";
 
     @Override
-    public Collection<Scope> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
+    public Collection<Scope> deserialize(JsonParser p,
+                                         DeserializationContext ctxt) throws IOException {
         String value = p.getValueAsString();
         Collection<Scope> scopes = null;
         if (StringUtils.isNoneEmpty(value)) {

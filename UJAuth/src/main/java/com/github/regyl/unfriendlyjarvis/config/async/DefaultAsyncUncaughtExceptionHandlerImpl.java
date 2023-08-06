@@ -14,8 +14,8 @@ public class DefaultAsyncUncaughtExceptionHandlerImpl implements AsyncUncaughtEx
 
     @Override
     public void handleUncaughtException(Throwable ex, Method method, Object... params) {
-        String exceptionMessage = String.format("In method %s#%s called exception of type %s: %s with calling arguments %s",
+        String exMessage = String.format("In method %s#%s called exception of type %s: %s with calling arguments %s",
                 method.getDeclaringClass(), method.getName(), ex.getClass(), ex.getMessage(), Arrays.toString(params));
-        log.warn(exceptionMessage);
+        log.warn(exMessage);
     }
 }

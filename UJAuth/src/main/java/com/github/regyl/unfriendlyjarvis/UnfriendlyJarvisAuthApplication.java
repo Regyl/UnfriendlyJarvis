@@ -13,8 +13,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableConfigurationProperties
 public class UnfriendlyJarvisAuthApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(UnfriendlyJarvisAuthApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(UnfriendlyJarvisAuthApplication.class, args);
+    }
 
 }

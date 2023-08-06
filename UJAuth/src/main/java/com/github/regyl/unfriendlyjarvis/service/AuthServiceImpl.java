@@ -20,7 +20,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-@ConditionalOnProperty(prefix = "application.security", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "application.security",
+        name = "enabled", havingValue = "true", matchIfMissing = true)
 public class AuthServiceImpl implements AuthService {
 
     private static final String USER_NOT_FOUND_MESSAGE = "User with login %s not found";

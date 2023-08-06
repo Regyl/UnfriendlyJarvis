@@ -36,7 +36,10 @@ public class OAuthGitHubServiceImpl implements OAuthService {
      * @param authService               {@link AuthService} for user management.
      * @param oAuthAccessTokenAcquirers {@link OAuthAccessTokenAcquirer} for acquiring access token.
      */
-    public OAuthGitHubServiceImpl(GitHubFeignClient gitHubFeignClient, GitHubConverter gitHubConverter, AuthService authService, List<OAuthAccessTokenAcquirer> oAuthAccessTokenAcquirers) {
+    public OAuthGitHubServiceImpl(GitHubFeignClient gitHubFeignClient,
+                                  GitHubConverter gitHubConverter,
+                                  AuthService authService,
+                                  List<OAuthAccessTokenAcquirer> oAuthAccessTokenAcquirers) {
         this.gitHubFeignClient = gitHubFeignClient;
         this.gitHubConverter = gitHubConverter;
         this.authService = authService;
@@ -45,7 +48,8 @@ public class OAuthGitHubServiceImpl implements OAuthService {
         this.oAuthAccessTokenAcquirer = oAuthAccessTokenAcquirers.stream()
                 .filter(acquirer -> providerType == acquirer.getSupportedProvider())
                 .findFirst()
-                .orElseThrow(() -> new JarvisException("Unsupported OAuth2.0 provider " + providerType.name()));
+                .orElseThrow(() -> new JarvisException(
+                        "Unsupported OAuth2.0 provider " + providerType.name()));
     }
 
     @Override
@@ -64,8 +68,10 @@ public class OAuthGitHubServiceImpl implements OAuthService {
     public void signUp(OAuthInitializationDto initializationDto) {
         String accessToken = oAuthAccessTokenAcquirer.acquire(initializationDto);
         UserInfoDto userInfoDto = gitHubFeignClient.getUserInfo(accessToken);
-        if (authService.isUserExistsByUsername(userInfoDto.getLogin())) {
-            throw new UserAlreadyExistsException("Found existing user");
+        
+        String login = userInfoDto.getLogin();
+        if (authService.isUserExistsByUsername(login)) {
+            throw new UserAlreadyExistsException(login);
         }
 
         RegistrationDto registrationDto = gitHubConverter.convert(userInfoDto);

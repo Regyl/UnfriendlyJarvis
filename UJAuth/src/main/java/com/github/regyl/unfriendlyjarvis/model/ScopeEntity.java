@@ -2,7 +2,12 @@ package com.github.regyl.unfriendlyjarvis.model;
 
 import com.github.regyl.unfriendlyjarvis.model.enums.OAuthProviderType;
 import com.github.regyl.unfriendlyjarvis.model.enums.Scope;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
