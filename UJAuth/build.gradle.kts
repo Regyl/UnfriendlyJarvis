@@ -64,9 +64,11 @@ dependencies {
 	implementation("org.apache.commons:commons-collections4:4.4")
 
 	compileOnly("org.projectlombok:lombok")
-	compileOnly("org.mapstruct:mapstruct:${property("mapstructVersion")}")
 	annotationProcessor("org.projectlombok:lombok")
+
+	compileOnly("org.mapstruct:mapstruct:${property("mapstructVersion")}")
 	annotationProcessor("org.mapstruct:mapstruct-processor:${property("mapstructVersion")}")
+
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
 	testImplementation("org.projectlombok:lombok")

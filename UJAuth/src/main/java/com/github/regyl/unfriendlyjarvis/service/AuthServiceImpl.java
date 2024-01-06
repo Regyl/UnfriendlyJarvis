@@ -55,8 +55,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public boolean signIn(String username, String password) {
-        String hashedPassword = userRepository.findPasswordByUsername(username).orElseThrow(() ->
-                new UsernameNotFoundException(String.format(USER_NOT_FOUND_MESSAGE, username)));
+        String hashedPassword = loadUserByUsername(username).getPassword();
 
         return passwordEncoder.matches(password, hashedPassword);
     }

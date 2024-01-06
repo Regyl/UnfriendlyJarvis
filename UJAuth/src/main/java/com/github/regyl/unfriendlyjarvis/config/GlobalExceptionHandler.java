@@ -97,7 +97,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(FeignException.class)
     public Map<String, Object> handleFeignException(FeignException e, HttpServletResponse servletResponse) {
-        if (NO_CONNECTION_FEIGN_EXCEPTION_STATUS != e.status()) {
+        log.warn("FeignException: {}", e.getMessage());
+        
+        if (NO_CONNECTION_FEIGN_EXCEPTION_STATUS != e.status()) { //little crunch to translate exception status code
             servletResponse.setStatus(e.status());
         } else {
             servletResponse.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());

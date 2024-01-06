@@ -6,6 +6,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,11 +37,15 @@ public class User extends AbstractEntity implements OAuthUserDetails, UserDetail
     private String login;
 
     @Email
+    @NotNull
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "password")
     private String password;
+    
+    @Column(name = "avatar_link")
+    private String avatarLink;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Authority> authorities;
