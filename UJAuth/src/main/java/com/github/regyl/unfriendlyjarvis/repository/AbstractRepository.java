@@ -1,6 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.repository;
 
-import com.github.regyl.unfriendlyjarvis.model.AbstractEntity;
+import com.github.regyl.unfriendlyjarvis.entity.AbstractEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

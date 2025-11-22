@@ -1,7 +1,7 @@
 package com.github.regyl.unfriendlyjarvis.api.converter;
 
 import com.github.regyl.unfriendlyjarvis.dto.RegistrationDto;
-import com.github.regyl.unfriendlyjarvis.model.User;
+import com.github.regyl.unfriendlyjarvis.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

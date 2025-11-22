@@ -1,6 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.annotation;
 
-import com.github.regyl.unfriendlyjarvis.model.enums.EventType;
+import com.github.regyl.unfriendlyjarvis.entity.enums.EventType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

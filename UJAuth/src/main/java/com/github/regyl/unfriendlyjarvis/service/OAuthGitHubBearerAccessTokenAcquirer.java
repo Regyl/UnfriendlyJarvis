@@ -7,7 +7,7 @@ import com.github.regyl.unfriendlyjarvis.dto.oauth.OAuthInitializationDto;
 import com.github.regyl.unfriendlyjarvis.dto.oauth.github.AccessTokenRequestDto;
 import com.github.regyl.unfriendlyjarvis.dto.oauth.github.AccessTokenResponseDto;
 import com.github.regyl.unfriendlyjarvis.exceptiion.JarvisException;
-import com.github.regyl.unfriendlyjarvis.model.enums.OAuthProviderType;
+import com.github.regyl.unfriendlyjarvis.entity.enums.OAuthProviderType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

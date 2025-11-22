@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.github.regyl.unfriendlyjarvis.dto.deserializer.ScopeCollectionDeserializer;
-import com.github.regyl.unfriendlyjarvis.model.enums.Scope;
+import com.github.regyl.unfriendlyjarvis.entity.enums.Scope;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

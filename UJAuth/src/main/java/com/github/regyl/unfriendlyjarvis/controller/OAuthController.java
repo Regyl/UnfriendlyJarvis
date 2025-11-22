@@ -3,7 +3,7 @@ package com.github.regyl.unfriendlyjarvis.controller;
 import com.github.regyl.unfriendlyjarvis.api.oauth.OAuthService;
 import com.github.regyl.unfriendlyjarvis.dto.oauth.OAuthInitializationDto;
 import com.github.regyl.unfriendlyjarvis.exceptiion.JarvisException;
-import com.github.regyl.unfriendlyjarvis.model.enums.OAuthProviderType;
+import com.github.regyl.unfriendlyjarvis.entity.enums.OAuthProviderType;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

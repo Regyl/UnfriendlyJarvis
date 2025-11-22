@@ -1,6 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.dto.oauth;
 
-import com.github.regyl.unfriendlyjarvis.model.enums.OAuthProviderType;
+import com.github.regyl.unfriendlyjarvis.entity.enums.OAuthProviderType;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

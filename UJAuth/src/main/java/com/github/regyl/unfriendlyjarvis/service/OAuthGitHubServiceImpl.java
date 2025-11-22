@@ -10,7 +10,7 @@ import com.github.regyl.unfriendlyjarvis.dto.oauth.OAuthInitializationDto;
 import com.github.regyl.unfriendlyjarvis.dto.oauth.github.UserInfoDto;
 import com.github.regyl.unfriendlyjarvis.exceptiion.JarvisException;
 import com.github.regyl.unfriendlyjarvis.exceptiion.UserAlreadyExistsException;
-import com.github.regyl.unfriendlyjarvis.model.enums.OAuthProviderType;
+import com.github.regyl.unfriendlyjarvis.entity.enums.OAuthProviderType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -1,11 +1,11 @@
 package com.github.regyl.unfriendlyjarvis.api.converter;
 
-import com.github.regyl.unfriendlyjarvis.config.oauth.OAuthConfigProperties;
+import com.github.regyl.unfriendlyjarvis.configuration.oauth.OAuthConfigProperties;
 import com.github.regyl.unfriendlyjarvis.dto.RegistrationDto;
 import com.github.regyl.unfriendlyjarvis.dto.oauth.OAuthInitializationDto;
 import com.github.regyl.unfriendlyjarvis.dto.oauth.github.AccessTokenRequestDto;
 import com.github.regyl.unfriendlyjarvis.dto.oauth.github.UserInfoDto;
-import com.github.regyl.unfriendlyjarvis.model.enums.OAuthProviderType;
+import com.github.regyl.unfriendlyjarvis.entity.enums.OAuthProviderType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

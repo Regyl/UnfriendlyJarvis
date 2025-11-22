@@ -1,6 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.api.oauth;
 
-import com.github.regyl.unfriendlyjarvis.model.enums.OAuthProviderType;
+import com.github.regyl.unfriendlyjarvis.entity.enums.OAuthProviderType;
 
 /**
  * OAuth 2.0 provider implementation.

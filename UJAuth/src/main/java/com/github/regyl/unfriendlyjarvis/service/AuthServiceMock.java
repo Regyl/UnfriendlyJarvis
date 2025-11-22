@@ -2,7 +2,7 @@ package com.github.regyl.unfriendlyjarvis.service;
 
 import com.github.regyl.unfriendlyjarvis.api.AuthService;
 import com.github.regyl.unfriendlyjarvis.dto.RegistrationDto;
-import com.github.regyl.unfriendlyjarvis.model.User;
+import com.github.regyl.unfriendlyjarvis.entity.User;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

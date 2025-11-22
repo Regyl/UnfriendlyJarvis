@@ -3,7 +3,7 @@ package com.github.regyl.unfriendlyjarvis.dto.deserializer;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.github.regyl.unfriendlyjarvis.model.enums.Scope;
+import com.github.regyl.unfriendlyjarvis.entity.enums.Scope;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
