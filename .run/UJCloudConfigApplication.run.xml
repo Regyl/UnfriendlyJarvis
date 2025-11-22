@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="UJCloudConfigApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <module name="UJCloudConfig.main" />
+    <module name="uj-cloud-config" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.github.regyl.unfriendlyjarvis.UnfriendlyJarvisCloudConfigApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
