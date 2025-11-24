@@ -22,6 +22,7 @@
         <lombok.version>1.18.42</lombok.version>
         <spring-cloud.version>2025.0.0</spring-cloud.version>
         <postgresql.version>42.7.7</postgresql.version>
+        <apache-collections.version>4.5.0</apache-collections.version>
 
         <!--tests-->
         <testcontainers.version>2.0.2</testcontainers.version>
@@ -97,8 +98,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-
-        <!-- Spring Kafka -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
@@ -120,11 +124,11 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Annotation Processors -->
+        <!-- Utils -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${apache-collections.version}</version>
         </dependency>
 
         <!-- Test Dependencies -->

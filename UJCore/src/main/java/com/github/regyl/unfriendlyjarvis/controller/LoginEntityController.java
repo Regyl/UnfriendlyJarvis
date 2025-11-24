@@ -23,6 +23,6 @@ public class LoginEntityController {
 
     @GetMapping
     public Collection<LoginEntity> findAll() {
-        return service.findAll();
+        return service.findAll().stream().limit(10).toList();
     }
 }

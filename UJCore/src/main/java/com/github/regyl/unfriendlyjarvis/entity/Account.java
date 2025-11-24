@@ -29,4 +29,7 @@ public class Account extends AbstractEntity {
 
     @Column(name = "check_word")
     private String checkWord;
+
+    @Column(name = "yandex_music_user_id")
+    private Long yandexMusicUserId;
 }

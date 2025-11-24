@@ -15,6 +15,7 @@ public class SecurityContextServiceImpl implements SecurityContextService {
         MOCK = new Account();
         MOCK.setId(1L);
         MOCK.setLogin("Regyl");
+        MOCK.setYandexMusicUserId(1430257434L);
     }
 
     @Override

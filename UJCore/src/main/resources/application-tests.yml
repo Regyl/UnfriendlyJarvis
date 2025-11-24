@@ -1,0 +1,12 @@
+spring:
+    cloud:
+        config:
+            discovery:
+                enabled: false
+            enabled: false
+        discovery:
+            enabled: false
+    jpa:
+        hibernate:
+            ddl-auto: create
+        show-sql: true
