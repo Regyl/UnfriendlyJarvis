@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
  * Feign client base configuration.
  */
 @Configuration
-@EnableFeignClients(basePackages = {"com.github.regyl.unfriendlyjarvis.api.feign"})
+@EnableFeignClients(basePackages = {"com.github.regyl.unfriendlyjarvis.feign"})
 public class FeignClientConfig {
 
 }

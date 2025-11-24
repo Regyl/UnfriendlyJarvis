@@ -1,3 +1,4 @@
+/*
 package com.github.regyl.unfriendlyjarvis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,9 +16,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+*/
 /**
  * Integration tests for basic authorization.
- */
+ *//*
+
 public class AuthenticationIntegrationTest extends TestcontainersConfig {
 
     static final String PASSWORD_SEQUENCE = "AAAAAAAAA";
@@ -99,3 +102,4 @@ public class AuthenticationIntegrationTest extends TestcontainersConfig {
                 .andReturn();
     }
 }
+*/

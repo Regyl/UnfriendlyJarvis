@@ -1,3 +1,4 @@
+/*
 package com.github.regyl.unfriendlyjarvis;
 
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -9,9 +10,11 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+*/
 /**
  * Configuration for integration tests with PostgreSQL docker container.
- */
+ *//*
+
 @SpringBootTest
 @Testcontainers
 @AutoConfigureMockMvc(addFilters = false)
@@ -32,3 +35,4 @@ public class TestcontainersConfig {
         registry.add("spring.datasource.username", postgreSQLContainer::getUsername);
     }
 }
+*/

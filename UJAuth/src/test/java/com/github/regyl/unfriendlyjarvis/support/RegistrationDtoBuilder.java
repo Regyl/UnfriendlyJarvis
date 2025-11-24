@@ -1,6 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.support;
 
-import com.github.regyl.unfriendlyjarvis.dto.RegistrationDto;
+import com.github.regyl.unfriendlyjarvis.controller.dto.RegistrationDto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;

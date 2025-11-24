@@ -1,7 +1,7 @@
 package com.github.regyl.unfriendlyjarvis.controller;
 
-import com.github.regyl.unfriendlyjarvis.api.AuthService;
-import com.github.regyl.unfriendlyjarvis.dto.RegistrationDto;
+import com.github.regyl.unfriendlyjarvis.service.AuthService;
+import com.github.regyl.unfriendlyjarvis.controller.dto.RegistrationDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

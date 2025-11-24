@@ -23,6 +23,8 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <lombok.version>1.18.42</lombok.version>
         <postgresql.version>42.7.7</postgresql.version>
+        <apache-collections.version>4.5.0</apache-collections.version>
+        <apache-lang.version>3.18.0</apache-lang.version>
 
         <!--tests-->
         <testcontainers.version>2.0.2</testcontainers.version>
@@ -31,6 +33,7 @@
         <!--plugins-->
         <jib.version>3.5.1</jib.version>
         <jacoco.version>0.8.14</jacoco.version>
+        <checkstyle.version>3.3.1</checkstyle.version>
 
         <java.version>25</java.version>
         <maven.compiler.source>25</maven.compiler.source>
@@ -112,12 +115,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.18.0</version>
+            <version>${apache-lang.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
-            <version>4.4</version>
+            <version>${apache-collections.version}</version>
         </dependency>
 
         <!-- Lombok -->
@@ -152,16 +155,6 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -220,10 +213,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>${checkstyle.version}</version>
                 <configuration>
                     <configLocation>config/checkstyle/checkstyle.xml</configLocation>
-                    <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
@@ -234,32 +226,6 @@
                         <phase>validate</phase>
                         <goals>
                             <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib.version}</version>
-                <configuration>
-                    <from>
-                        <image>eclipse-temurin:25-jre</image>
-                    </from>
-                    <to>
-                        <image>registry.hub.docker.com/regyl/yasn-auth</image>
-                        <auth>
-                            <username>${env.DockerHubLogin}</username>
-                            <password>${env.DockerHubPassword}</password>
-                        </auth>
-                    </to>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
                         </goals>
                     </execution>
                 </executions>

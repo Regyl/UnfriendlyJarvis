@@ -16,7 +16,7 @@ import java.util.Map;
 @Slf4j(topic = "OAuthConfigProperties")
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "application.oauth")
+@ConfigurationProperties(prefix = "spring.application.oauth")
 public class OAuthConfigProperties implements InitializingBean {
 
     private Map<OAuthProviderType, OAuthClientProperties> providers;

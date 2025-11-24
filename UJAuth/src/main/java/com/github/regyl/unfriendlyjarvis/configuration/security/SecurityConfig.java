@@ -3,6 +3,8 @@ package com.github.regyl.unfriendlyjarvis.configuration.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -61,8 +63,8 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
                 .and().httpBasic();*/
         http
-                .cors().disable()
-                .csrf().disable()
+                .cors(CorsConfigurer::disable)
+                .csrf(CsrfConfigurer::disable)
                 .authorizeRequests().anyRequest()
                 .permitAll();
         return http.build();

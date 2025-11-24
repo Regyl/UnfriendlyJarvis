@@ -3,6 +3,7 @@ package com.github.regyl.unfriendlyjarvis.configuration;
 import com.github.regyl.unfriendlyjarvis.exceptiion.UserAlreadyExistsException;
 import feign.FeignException;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,18 +15,22 @@ import java.time.Clock;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * Rest controllers exception handler.
  */
 @Slf4j
 @RestControllerAdvice
+@RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
     /**
      * When connection wasn't established, feign causes error with status below.
      */
     private static final int NO_CONNECTION_FEIGN_EXCEPTION_STATUS = -1;
+
+    private final Supplier<OffsetDateTime> dateTimeSupplier;
     
     /**
      * Handle the rest exceptions.
@@ -37,11 +42,10 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     public Map<String, Object> handleRuntimeException(RuntimeException e) {
         log.error("RuntimeException", e);
-        e.printStackTrace();
 
         Map<String, Object> body = new HashMap<>(5, 1);
         body.put("message", e.getMessage());
-        body.put("timestamp", OffsetDateTime.now(Clock.systemUTC()));
+        body.put("timestamp", dateTimeSupplier.get());
         body.put("type", e.getClass());
 
         Map<String, Object> currentBody = body;
@@ -97,7 +101,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(FeignException.class)
     public Map<String, Object> handleFeignException(FeignException e, HttpServletResponse servletResponse) {
-        log.warn("FeignException: {}", e.getMessage());
+        log.error("FeignException", e);
         
         if (NO_CONNECTION_FEIGN_EXCEPTION_STATUS != e.status()) { //little crunch to translate exception status code
             servletResponse.setStatus(e.status());
@@ -112,7 +116,7 @@ public class GlobalExceptionHandler {
         Map<String, Object> body = new HashMap<>(4, 1);
 
         body.put("message", e.getMessage());
-        body.put("timestamp", OffsetDateTime.now(Clock.systemUTC()));
+        body.put("timestamp", dateTimeSupplier.get());
         body.put("type", e.getClass());
 
         return body;
