@@ -12,4 +12,6 @@ public class S3ConfigurationProperties {
     private String accessKey;
 
     private String secretKey;
+
+    private Integer presignedUriTtlHours;
 }

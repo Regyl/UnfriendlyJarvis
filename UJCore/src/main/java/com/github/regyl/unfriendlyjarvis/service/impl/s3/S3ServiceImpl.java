@@ -1,5 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.service.impl.s3;
 
+import com.github.regyl.unfriendlyjarvis.configuration.s3.S3ConfigurationProperties;
 import com.github.regyl.unfriendlyjarvis.service.s3.S3Service;
 import io.minio.*;
 import io.minio.http.Method;
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class S3ServiceImpl implements S3Service {
 
     private final MinioClient minioClient;
-    private static final int PRESIGNED_URL_EXPIRATION_HOURS = 24;
+    private final S3ConfigurationProperties configProps;
 
     @Override
     public String uploadFile(String bucketName, String objectName, MultipartFile file) {
@@ -39,7 +40,7 @@ public class S3ServiceImpl implements S3Service {
             );
 
             log.info("File uploaded successfully: {}/{}", bucketName, objectName);
-            return bucketName + "/" + objectName;
+            return objectName;
         } catch (Exception e) {
             log.error("Error uploading file to MinIO: {}/{}", bucketName, objectName, e);
             throw new RuntimeException("Failed to upload file to MinIO", e);
@@ -53,7 +54,7 @@ public class S3ServiceImpl implements S3Service {
                     .method(Method.GET)
                     .bucket(bucketName)
                     .object(objectName)
-                    .expiry(PRESIGNED_URL_EXPIRATION_HOURS, TimeUnit.HOURS)
+                    .expiry(configProps.getPresignedUriTtlHours(), TimeUnit.HOURS)
                     .build();
 
             return minioClient.getPresignedObjectUrl(args);

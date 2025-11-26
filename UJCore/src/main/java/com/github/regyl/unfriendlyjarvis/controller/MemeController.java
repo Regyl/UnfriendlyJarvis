@@ -1,5 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.controller;
 
+import com.github.regyl.unfriendlyjarvis.controller.dto.meme.MemeDto;
 import com.github.regyl.unfriendlyjarvis.entity.MemeEntity;
 import com.github.regyl.unfriendlyjarvis.service.meme.MemeService;
 import jakarta.validation.constraints.NotNull;
@@ -40,7 +41,7 @@ public class MemeController {
      * @return collection of meme entities
      */
     @GetMapping
-    public Collection<MemeEntity> findAll() {
+    public Collection<MemeDto> findAll() {
         return service.findAll();
     }
 }

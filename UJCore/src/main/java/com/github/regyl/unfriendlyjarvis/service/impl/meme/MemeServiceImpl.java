@@ -1,5 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.service.impl.meme;
 
+import com.github.regyl.unfriendlyjarvis.controller.dto.meme.MemeDto;
 import com.github.regyl.unfriendlyjarvis.entity.Account;
 import com.github.regyl.unfriendlyjarvis.entity.MemeEntity;
 import com.github.regyl.unfriendlyjarvis.entity.enums.Source;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.UUID;
+import java.util.function.BiFunction;
 
 /**
  * Implementation of MemeService.
@@ -27,12 +29,11 @@ public class MemeServiceImpl implements MemeService {
     private final MemeRepository repository;
     private final S3Service s3Service;
     private final SecurityContextService securityContextService;
+    private final BiFunction<String, String, MemeEntity> memeMapper;
 
     @Override
     @Transactional
     public MemeEntity uploadMeme(MultipartFile file, String source) {
-        Account account = securityContextService.getAuthorizedAccount();
-
         // Generate unique object name
         String objectName = generateObjectName(file.getOriginalFilename());
 
@@ -44,19 +45,15 @@ public class MemeServiceImpl implements MemeService {
         );
 
         // Create meme entity
-        MemeEntity memeEntity = MemeEntity.builder()
-                .account(account)
-                .bucketPath(bucketPath)
-                .source(parseSource(source))
-                .build();
+        MemeEntity memeEntity = memeMapper.apply(bucketPath, source);
 
         return repository.save(memeEntity);
     }
 
     @Override
-    public Collection<MemeEntity> findAll() {
+    public Collection<MemeDto> findAll() {
         Account account = securityContextService.getAuthorizedAccount();
-        return repository.findAllByAccount(account);
+        return repository.findAllByAccount(account).stream().map(item -> new MemeDto(s3Service.getPresignedUrl("meme", item.getBucketPath()))).toList();
     }
 
     /**
@@ -71,25 +68,6 @@ public class MemeServiceImpl implements MemeService {
             extension = originalFilename.substring(originalFilename.lastIndexOf("."));
         }
         return UUID.randomUUID() + extension;
-    }
-
-    /**
-     * Parse source string to Source enum.
-     * Returns OTHER if source is null or invalid.
-     *
-     * @param source source string
-     * @return Source enum
-     */
-    private Source parseSource(String source) {
-        if (source == null || source.isBlank()) {
-            return Source.OTHER;
-        }
-        try {
-            return Source.valueOf(source.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            log.warn("Invalid source value: {}, using OTHER", source);
-            return Source.OTHER;
-        }
     }
 }
 

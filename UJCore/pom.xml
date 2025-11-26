@@ -232,7 +232,7 @@
                         <image>eclipse-temurin:25-jre</image>
                     </from>
                     <to>
-                        <image>registry.hub.docker.com/regyl/yasn-core</image>
+                        <image>registry.hub.docker.com/regyl/uj-core</image>
                         <auth>
                             <username>${env.DockerHubLogin}</username>
                             <password>${env.DockerHubPassword}</password>
