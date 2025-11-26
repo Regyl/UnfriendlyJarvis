@@ -13,7 +13,6 @@ import java.util.Map;
 
 @Slf4j(topic = "LoggingBeanPostProcessor")
 @Component
-@ConditionalOnProperty(prefix = "application.development", name = "enabled", havingValue = "true")
 public class LoggingBeanPostProcessor implements DestructionAwareBeanPostProcessor {
 
     private final Map<String, Long> beanMap = new HashMap<>();

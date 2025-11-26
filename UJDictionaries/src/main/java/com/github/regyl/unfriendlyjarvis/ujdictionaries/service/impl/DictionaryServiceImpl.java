@@ -1,11 +1,11 @@
-package com.github.regyl.unfriendlyjarvis.ujdictionaries.service;
+package com.github.regyl.unfriendlyjarvis.ujdictionaries.service.impl;
 
-import com.github.regyl.unfriendlyjarvis.ujdictionaries.api.DefaultConverter;
-import com.github.regyl.unfriendlyjarvis.ujdictionaries.api.DictionaryService;
 import com.github.regyl.unfriendlyjarvis.ujdictionaries.dto.ShortDictionaryDto;
 import com.github.regyl.unfriendlyjarvis.ujdictionaries.model.AbstractDictionary;
-import com.github.regyl.unfriendlyjarvis.ujdictionaries.model.DictionaryType;
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.enumeration.DictionaryType;
 import com.github.regyl.unfriendlyjarvis.ujdictionaries.repository.AbstractDictionaryRepository;
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.service.DefaultConverter;
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.service.DictionaryService;
 import com.github.regyl.unfriendlyjarvis.ujdictionaries.util.BeanSearchUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

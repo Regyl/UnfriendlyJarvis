@@ -1,4 +1,4 @@
-package com.github.regyl.unfriendlyjarvis.ujdictionaries.api;
+package com.github.regyl.unfriendlyjarvis.ujdictionaries.service;
 
 public interface DefaultConverter<T, S> extends DefaultDictionaryPredicate {
     

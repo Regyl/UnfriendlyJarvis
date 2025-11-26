@@ -1,8 +1,8 @@
 package com.github.regyl.unfriendlyjarvis.ujdictionaries.controller;
 
-import com.github.regyl.unfriendlyjarvis.ujdictionaries.api.DictionaryService;
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.service.DictionaryService;
 import com.github.regyl.unfriendlyjarvis.ujdictionaries.dto.ShortDictionaryDto;
-import com.github.regyl.unfriendlyjarvis.ujdictionaries.model.DictionaryType;
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.enumeration.DictionaryType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

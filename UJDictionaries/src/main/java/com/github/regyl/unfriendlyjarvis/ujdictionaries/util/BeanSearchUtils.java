@@ -1,8 +1,8 @@
 package com.github.regyl.unfriendlyjarvis.ujdictionaries.util;
 
-import com.github.regyl.unfriendlyjarvis.ujdictionaries.api.DefaultDictionaryPredicate;
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.service.DefaultDictionaryPredicate;
 import com.github.regyl.unfriendlyjarvis.ujdictionaries.exception.UnfriendlyJarvisException;
-import com.github.regyl.unfriendlyjarvis.ujdictionaries.model.DictionaryType;
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.enumeration.DictionaryType;
 
 import java.util.Collection;
 

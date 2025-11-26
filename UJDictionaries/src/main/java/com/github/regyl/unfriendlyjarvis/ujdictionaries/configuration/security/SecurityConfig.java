@@ -1,13 +1,11 @@
-package com.github.regyl.unfriendlyjarvis.ujdictionaries.config;
+package com.github.regyl.unfriendlyjarvis.ujdictionaries.configuration.security;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@ConditionalOnProperty(prefix = "application.development", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class SecurityConfig {
 
     @Bean

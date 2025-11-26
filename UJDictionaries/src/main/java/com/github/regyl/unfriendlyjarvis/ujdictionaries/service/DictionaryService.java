@@ -1,7 +1,7 @@
-package com.github.regyl.unfriendlyjarvis.ujdictionaries.api;
+package com.github.regyl.unfriendlyjarvis.ujdictionaries.service;
 
 import com.github.regyl.unfriendlyjarvis.ujdictionaries.dto.ShortDictionaryDto;
-import com.github.regyl.unfriendlyjarvis.ujdictionaries.model.DictionaryType;
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.enumeration.DictionaryType;
 
 import java.util.List;
 

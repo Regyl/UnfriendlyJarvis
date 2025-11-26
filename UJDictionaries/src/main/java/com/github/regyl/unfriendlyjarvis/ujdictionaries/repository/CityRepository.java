@@ -1,7 +1,7 @@
 package com.github.regyl.unfriendlyjarvis.ujdictionaries.repository;
 
 import com.github.regyl.unfriendlyjarvis.ujdictionaries.model.CityModel;
-import com.github.regyl.unfriendlyjarvis.ujdictionaries.model.DictionaryType;
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.enumeration.DictionaryType;
 import org.springframework.stereotype.Repository;
 
 @Repository

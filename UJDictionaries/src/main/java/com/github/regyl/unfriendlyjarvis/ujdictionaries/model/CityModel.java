@@ -1,5 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.ujdictionaries.model;
 
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.enumeration.DictionaryType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
