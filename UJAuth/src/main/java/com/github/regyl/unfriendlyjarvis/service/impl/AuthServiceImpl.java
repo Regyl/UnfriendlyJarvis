@@ -1,19 +1,23 @@
 package com.github.regyl.unfriendlyjarvis.service.impl;
 
 import com.github.regyl.unfriendlyjarvis.annotation.BusinessEvent;
-import com.github.regyl.unfriendlyjarvis.service.AuthService;
-import com.github.regyl.unfriendlyjarvis.service.impl.converter.RegistrationDtoMapper;
 import com.github.regyl.unfriendlyjarvis.controller.dto.RegistrationDto;
-import com.github.regyl.unfriendlyjarvis.exceptiion.UserAlreadyExistsException;
+import com.github.regyl.unfriendlyjarvis.controller.dto.TokenResponseDto;
 import com.github.regyl.unfriendlyjarvis.entity.User;
-import com.github.regyl.unfriendlyjarvis.entity.enums.EventType;
+import com.github.regyl.unfriendlyjarvis.enumeration.EventType;
+import com.github.regyl.unfriendlyjarvis.exceptiion.JarvisException;
+import com.github.regyl.unfriendlyjarvis.exceptiion.UserAlreadyExistsException;
 import com.github.regyl.unfriendlyjarvis.repository.UserRepository;
+import com.github.regyl.unfriendlyjarvis.service.AuthService;
+import com.github.regyl.unfriendlyjarvis.service.jwt.JwtTokenProviderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.function.Function;
 
 /**
  * Service for simple username & password based authorization.
@@ -25,10 +29,13 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
 
     private static final String USER_NOT_FOUND_MESSAGE = "User with login %s not found";
+    private static final String INVALID_CREDENTIALS_MESSAGE = "Invalid credentials";
+    private static final String INVALID_REFRESH_TOKEN_MESSAGE = "Invalid refresh token";
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final RegistrationDtoMapper registrationDtoMapper;
+    private final Function<RegistrationDto, User> registrationDtoMapper;
+    private final JwtTokenProviderService jwtProvider;
 
     @Override
     public boolean isUserExistsByUsername(String username) {
@@ -37,14 +44,16 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @BusinessEvent(type = EventType.REGISTRATION)
-    public void signUp(RegistrationDto registrationDto) {
+    public TokenResponseDto signUp(RegistrationDto registrationDto) {
         String username = registrationDto.getEmail();
         if (isUserExistsByUsername(username)) {
             throw new UserAlreadyExistsException(username);
         }
 
-        User newUser = registrationDtoMapper.convert(registrationDto);
-        userRepository.save(newUser);
+        User newUser = registrationDtoMapper.apply(registrationDto);
+        User savedUser = userRepository.save(newUser);
+        
+        return generateTokens(savedUser);
     }
 
     @Override
@@ -54,9 +63,44 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public boolean signIn(String username, String password) {
-        String hashedPassword = loadUserByUsername(username).getPassword();
+    public TokenResponseDto signIn(String username, String password) {
+        User user = userRepository.findByEmail(username)
+                .orElseThrow(() -> new JarvisException(INVALID_CREDENTIALS_MESSAGE));
 
-        return passwordEncoder.matches(password, hashedPassword);
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new JarvisException(INVALID_CREDENTIALS_MESSAGE);
+        }
+
+        return generateTokens(user);
+    }
+
+    @Override
+    public TokenResponseDto refreshToken(String refreshToken) {
+        if (!jwtProvider.validateToken(refreshToken)) {
+            throw new JarvisException(INVALID_REFRESH_TOKEN_MESSAGE);
+        }
+
+        if (!jwtProvider.isRefreshToken(refreshToken)) {
+            throw new JarvisException(INVALID_REFRESH_TOKEN_MESSAGE);
+        }
+
+        String username = jwtProvider.getUsernameFromToken(refreshToken);
+        User user = userRepository.findByEmail(username)
+                .orElseThrow(() -> new JarvisException(INVALID_REFRESH_TOKEN_MESSAGE));
+
+        return generateTokens(user);
+    }
+
+    /**
+     * Generate access and refresh tokens for user.
+     *
+     * @param user user entity
+     * @return token response DTO
+     */
+    private TokenResponseDto generateTokens(User user) {
+        String accessToken = jwtProvider.generateAccessToken(user);
+        String refreshToken = jwtProvider.generateRefreshToken(user);
+        
+        return new TokenResponseDto(accessToken, refreshToken, "Bearer");
     }
 }

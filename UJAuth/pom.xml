@@ -25,6 +25,7 @@
         <postgresql.version>42.7.7</postgresql.version>
         <apache-collections.version>4.5.0</apache-collections.version>
         <apache-lang.version>3.18.0</apache-lang.version>
+        <jjwt.version>0.12.6</jjwt.version>
 
         <!--tests-->
         <testcontainers.version>2.0.2</testcontainers.version>
@@ -136,6 +137,25 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+
+        <!-- JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- Annotation Processors -->

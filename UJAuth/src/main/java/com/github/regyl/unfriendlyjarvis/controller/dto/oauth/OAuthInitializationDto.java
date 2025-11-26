@@ -1,9 +1,8 @@
 package com.github.regyl.unfriendlyjarvis.controller.dto.oauth;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.github.regyl.unfriendlyjarvis.entity.enums.OAuthProviderType;
+import com.github.regyl.unfriendlyjarvis.enumeration.OAuthProviderType;
 import com.github.regyl.unfriendlyjarvis.service.impl.deserializer.OAuthProviderTypeDeserializer;
-import com.github.regyl.unfriendlyjarvis.service.impl.deserializer.ScopeCollectionDeserializer;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

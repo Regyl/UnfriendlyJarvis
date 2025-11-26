@@ -1,17 +1,19 @@
 package com.github.regyl.unfriendlyjarvis.service.impl;
 
+import com.github.regyl.unfriendlyjarvis.controller.dto.TokenResponseDto;
 import com.github.regyl.unfriendlyjarvis.service.AuthService;
 import com.github.regyl.unfriendlyjarvis.controller.dto.RegistrationDto;
 import com.github.regyl.unfriendlyjarvis.entity.User;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
  * Mock of {@link AuthService} for development testing.
  */
-@Service
+@Component
 @ConditionalOnMissingBean(AuthServiceImpl.class)
 public class AuthServiceMock implements AuthService {
 
@@ -21,8 +23,8 @@ public class AuthServiceMock implements AuthService {
     }
 
     @Override
-    public void signUp(RegistrationDto registrationDto) {
-
+    public TokenResponseDto signUp(RegistrationDto registrationDto) {
+        return null;
     }
 
     @Override
@@ -31,7 +33,12 @@ public class AuthServiceMock implements AuthService {
     }
 
     @Override
-    public boolean signIn(String username, String password) {
-        return Boolean.TRUE;
+    public TokenResponseDto signIn(String username, String password) {
+        return null;
+    }
+
+    @Override
+    public TokenResponseDto refreshToken(String refreshToken) {
+        return null;
     }
 }

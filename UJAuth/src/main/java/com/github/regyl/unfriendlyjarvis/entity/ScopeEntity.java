@@ -1,7 +1,7 @@
 package com.github.regyl.unfriendlyjarvis.entity;
 
-import com.github.regyl.unfriendlyjarvis.entity.enums.OAuthProviderType;
-import com.github.regyl.unfriendlyjarvis.entity.enums.Scope;
+import com.github.regyl.unfriendlyjarvis.enumeration.OAuthProviderType;
+import com.github.regyl.unfriendlyjarvis.enumeration.Scope;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Entity
-@Table(name = "scope", uniqueConstraints = @UniqueConstraint(columnNames = {"value", "provider"}))
+@Table(name = "e_scope", uniqueConstraints = @UniqueConstraint(columnNames = {"value", "provider"}))
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

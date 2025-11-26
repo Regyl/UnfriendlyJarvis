@@ -1,6 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.entity;
 
-import com.github.regyl.unfriendlyjarvis.entity.enums.AuthorityEnum;
+import com.github.regyl.unfriendlyjarvis.enumeration.AuthorityEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,7 +18,7 @@ import org.springframework.security.core.GrantedAuthority;
  */
 @Data
 @Entity
-@Table(name = "authority")
+@Table(name = "e_authority")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

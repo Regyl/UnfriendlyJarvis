@@ -1,5 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.feign;
 
+import com.github.regyl.unfriendlyjarvis.controller.dto.oauth.github.UserEmailDto;
 import com.github.regyl.unfriendlyjarvis.controller.dto.oauth.github.UserInfoDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpHeaders;
@@ -34,5 +35,5 @@ public interface GitHubFeignClient {
      * @return              list of user's emails
      */
     @GetMapping(value = "/user/emails", consumes = MediaType.APPLICATION_JSON_VALUE)
-    List<String> getUserEmails(@RequestHeader(HttpHeaders.AUTHORIZATION) String accessToken);
+    List<UserEmailDto> getUserEmails(@RequestHeader(HttpHeaders.AUTHORIZATION) String accessToken);
 }

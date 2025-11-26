@@ -1,4 +1,4 @@
-package com.github.regyl.unfriendlyjarvis.entity.enums;
+package com.github.regyl.unfriendlyjarvis.enumeration;
 
 import org.apache.commons.lang3.StringUtils;
 

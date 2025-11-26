@@ -1,6 +1,4 @@
-package com.github.regyl.unfriendlyjarvis.entity.enums;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
+package com.github.regyl.unfriendlyjarvis.enumeration;
 
 /**
  * Supported OAuth 2.0 providers.

@@ -26,7 +26,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user_entity")
+@Table(name = "e_user")
 @EqualsAndHashCode(callSuper = true)
 public class User extends AbstractEntity implements OAuthUserDetails, UserDetails {
 

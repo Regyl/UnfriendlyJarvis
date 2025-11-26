@@ -1,7 +1,9 @@
 package com.github.regyl.unfriendlyjarvis.controller;
 
-import com.github.regyl.unfriendlyjarvis.service.AuthService;
+import com.github.regyl.unfriendlyjarvis.controller.dto.RefreshTokenRequestDto;
 import com.github.regyl.unfriendlyjarvis.controller.dto.RegistrationDto;
+import com.github.regyl.unfriendlyjarvis.controller.dto.TokenResponseDto;
+import com.github.regyl.unfriendlyjarvis.service.AuthService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -30,11 +32,11 @@ public class AuthController {
      *
      * @param username  username
      * @param password  password
-     * @return          flag are credentials valid
+     * @return          JWT tokens (access and refresh)
      */
     @GetMapping("/sign-in")
-    public boolean signIn(@RequestParam("username") @NotEmpty String username,
-                          @RequestParam("password") @NotEmpty String password) {
+    public TokenResponseDto signIn(@RequestParam("username") @NotEmpty String username,
+                                    @RequestParam("password") @NotEmpty String password) {
         return authService.signIn(username, password);
     }
 
@@ -42,10 +44,22 @@ public class AuthController {
      * Creates new user.
      *
      * @param registrationDto DTO with information about new user
+     * @return                JWT tokens (access and refresh)
      */
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
-    public void signUp(@RequestBody @NotNull @Valid RegistrationDto registrationDto) {
-        authService.signUp(registrationDto);
+    public TokenResponseDto signUp(@RequestBody @NotNull @Valid RegistrationDto registrationDto) {
+        return authService.signUp(registrationDto);
+    }
+
+    /**
+     * Refresh access token using refresh token.
+     *
+     * @param refreshTokenRequest DTO with refresh token
+     * @return                   new JWT tokens (access and refresh)
+     */
+    @PostMapping("/refresh")
+    public TokenResponseDto refreshToken(@RequestBody @NotNull @Valid RefreshTokenRequestDto refreshTokenRequest) {
+        return authService.refreshToken(refreshTokenRequest.getRefreshToken());
     }
 }

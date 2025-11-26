@@ -3,13 +3,12 @@ package com.github.regyl.unfriendlyjarvis.service.impl.deserializer;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.github.regyl.unfriendlyjarvis.entity.enums.Scope;
+import com.github.regyl.unfriendlyjarvis.enumeration.Scope;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

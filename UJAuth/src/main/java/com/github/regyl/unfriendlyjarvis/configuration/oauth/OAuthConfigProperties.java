@@ -1,6 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.configuration.oauth;
 
-import com.github.regyl.unfriendlyjarvis.entity.enums.OAuthProviderType;
+import com.github.regyl.unfriendlyjarvis.enumeration.OAuthProviderType;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;

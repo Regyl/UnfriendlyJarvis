@@ -1,6 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.controller.dto;
 
-import com.github.regyl.unfriendlyjarvis.entity.enums.EventType;
+import com.github.regyl.unfriendlyjarvis.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,7 @@
 package com.github.regyl.unfriendlyjarvis.service;
 
 import com.github.regyl.unfriendlyjarvis.controller.dto.RegistrationDto;
+import com.github.regyl.unfriendlyjarvis.controller.dto.TokenResponseDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -20,15 +21,24 @@ public interface AuthService extends UserDetailsService {
      * Check and create new user record.
      *
      * @param registrationDto DTO with user's information
+     * @return                JWT tokens (access and refresh)
      */
-    void signUp(RegistrationDto registrationDto);
+    TokenResponseDto signUp(RegistrationDto registrationDto);
 
     /**
-     * Validate credentials.
+     * Validate credentials and generate JWT tokens.
      *
      * @param username user's username
      * @param password user's password
-     * @return         flag are credentials valid
+     * @return         JWT tokens (access and refresh)
      */
-    boolean signIn(String username, String password);
+    TokenResponseDto signIn(String username, String password);
+
+    /**
+     * Refresh access token using refresh token.
+     *
+     * @param refreshToken refresh token
+     * @return             new JWT tokens (access and refresh)
+     */
+    TokenResponseDto refreshToken(String refreshToken);
 }

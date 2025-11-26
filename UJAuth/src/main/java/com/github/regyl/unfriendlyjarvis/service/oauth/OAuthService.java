@@ -1,5 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.service.oauth;
 
+import com.github.regyl.unfriendlyjarvis.controller.dto.TokenResponseDto;
 import com.github.regyl.unfriendlyjarvis.controller.dto.oauth.OAuthInitializationDto;
 
 /**
@@ -8,17 +9,18 @@ import com.github.regyl.unfriendlyjarvis.controller.dto.oauth.OAuthInitializatio
 public interface OAuthService extends OAuthSupportedProvider {
     
     /**
-     * Check if user exists.
+     * Check if user exists and generate tokens.
      *
      * @param initializationDto DTO with information to initialize OAuth 2.0 authorization
-     * @return                  true if user exists, false otherwise
+     * @return                   JWT tokens (access and refresh) if user exists, null otherwise
      */
-    boolean exists(OAuthInitializationDto initializationDto);
+    TokenResponseDto signIn(OAuthInitializationDto initializationDto);
     
     /**
-     * Sign up user.
+     * Sign up user and generate tokens.
      *
      * @param initializationDto DTO with information to initialize OAuth 2.0 authorization
+     * @return                  JWT tokens (access and refresh)
      */
-    void signUp(OAuthInitializationDto initializationDto);
+    TokenResponseDto signUp(OAuthInitializationDto initializationDto);
 }

@@ -4,13 +4,12 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.github.regyl.unfriendlyjarvis.service.impl.deserializer.ScopeCollectionDeserializer;
-import com.github.regyl.unfriendlyjarvis.entity.enums.Scope;
+import com.github.regyl.unfriendlyjarvis.enumeration.Scope;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Collection;
-import java.util.Set;
 
 /**
  * DTO with user's access token and allowed scopes.
