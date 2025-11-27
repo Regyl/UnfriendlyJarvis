@@ -1,11 +1,11 @@
 package com.github.regyl.unfriendlyjarvis.ujdictionaries.service;
 
-import com.github.regyl.unfriendlyjarvis.ujdictionaries.dto.ShortDictionaryDto;
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.controller.dto.ShortDictionaryDto;
 import com.github.regyl.unfriendlyjarvis.ujdictionaries.enumeration.DictionaryType;
 
 import java.util.List;
 
 public interface DictionaryService {
     
-    List<ShortDictionaryDto> getCatalogRecords(DictionaryType dictionaryType);
+    List<? extends ShortDictionaryDto> getCatalogRecords(DictionaryType dictionaryType);
 }

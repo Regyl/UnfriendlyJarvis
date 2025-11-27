@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "country")
 @EqualsAndHashCode(callSuper = true)
-public class CountryModel extends AbstractDictionary {
+public class CountryEntity extends AbstractDictionary {
     
     @Column
     private String alpha;

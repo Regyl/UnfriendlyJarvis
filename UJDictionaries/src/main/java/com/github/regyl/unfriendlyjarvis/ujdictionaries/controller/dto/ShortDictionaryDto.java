@@ -1,13 +1,14 @@
-package com.github.regyl.unfriendlyjarvis.ujdictionaries.dto;
+package com.github.regyl.unfriendlyjarvis.ujdictionaries.controller.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.UUID;
 
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShortDictionaryDto {
@@ -15,9 +16,4 @@ public class ShortDictionaryDto {
     private UUID id;
     
     private String value;
-    
-    @JsonProperty("label")
-    public String getLabel() {
-        return value;
-    }
 }
