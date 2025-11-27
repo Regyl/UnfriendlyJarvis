@@ -3,32 +3,35 @@ package com.github.regyl.unfriendlyjarvis.service.impl.meme;
 import com.github.regyl.unfriendlyjarvis.entity.Account;
 import com.github.regyl.unfriendlyjarvis.entity.MemeEntity;
 import com.github.regyl.unfriendlyjarvis.entity.enums.Source;
+import com.github.regyl.unfriendlyjarvis.model.MemeModel;
 import com.github.regyl.unfriendlyjarvis.service.SecurityContextService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.time.OffsetDateTime;
-import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class MemeEntityMapperServiceImpl implements BiFunction<String, String, MemeEntity> {
+public class MemeModelToMemeEntityMapperServiceImpl implements Function<MemeModel, MemeEntity> {
 
     private final Supplier<OffsetDateTime> dateTimeSupplier;
     private final SecurityContextService securityContextService;
 
     @Override
-    public MemeEntity apply(String s1, String s2) {
+    public MemeEntity apply(MemeModel model) {
         Account account = securityContextService.getAuthorizedAccount();
 
+        Source source = parseSource(model.getSource());
         return MemeEntity.builder()
                 .account(account)
-                .bucketPath(s1)
-                .source(parseSource(s2))
+                .bucketPath(model.getBucketPath())
+                .source(source)
                 .created(dateTimeSupplier.get())
+                .fileName(model.getFileName())
                 .build();
     }
 

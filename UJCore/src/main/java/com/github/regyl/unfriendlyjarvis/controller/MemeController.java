@@ -1,7 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.controller;
 
 import com.github.regyl.unfriendlyjarvis.controller.dto.meme.MemeDto;
-import com.github.regyl.unfriendlyjarvis.entity.MemeEntity;
 import com.github.regyl.unfriendlyjarvis.service.meme.MemeService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +29,7 @@ public class MemeController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MemeEntity uploadMeme(@NotNull @RequestParam("file") MultipartFile file,
+    public MemeDto uploadMeme(@NotNull @RequestParam("file") MultipartFile file,
                                  @RequestParam(value = "source", required = false) String source) {
         return service.uploadMeme(file, source);
     }
@@ -45,4 +44,6 @@ public class MemeController {
         return service.findAll();
     }
 }
+
+
 

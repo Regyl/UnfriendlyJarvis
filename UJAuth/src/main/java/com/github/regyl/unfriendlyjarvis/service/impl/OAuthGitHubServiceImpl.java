@@ -13,10 +13,10 @@ import com.github.regyl.unfriendlyjarvis.feign.GitHubFeignClient;
 import com.github.regyl.unfriendlyjarvis.repository.UserRepository;
 import com.github.regyl.unfriendlyjarvis.service.AuthService;
 import com.github.regyl.unfriendlyjarvis.service.impl.converter.UserInfoDtoToRegistrationDtoMapperServiceImpl;
+import com.github.regyl.unfriendlyjarvis.service.impl.jwt.JwtTokenProviderServiceImpl;
 import com.github.regyl.unfriendlyjarvis.service.jwt.JwtTokenProviderService;
 import com.github.regyl.unfriendlyjarvis.service.oauth.OAuthAccessTokenAcquirer;
 import com.github.regyl.unfriendlyjarvis.service.oauth.OAuthService;
-import com.github.regyl.unfriendlyjarvis.service.impl.jwt.JwtTokenProviderServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

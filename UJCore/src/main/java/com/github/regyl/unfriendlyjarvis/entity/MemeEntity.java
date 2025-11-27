@@ -38,5 +38,11 @@ public class MemeEntity extends AbstractEntity {
     @NotBlank
     @Column(name = "bucket_path", nullable = false)
     private String bucketPath;
+
+    @NotBlank
+    @Column(name = "file_name", nullable = false)
+    private String fileName;
 }
+
+
 
