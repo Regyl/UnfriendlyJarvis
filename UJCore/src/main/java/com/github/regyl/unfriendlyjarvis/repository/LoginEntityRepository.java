@@ -1,8 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.repository;
 
-import com.github.regyl.unfriendlyjarvis.entity.Account;
 import com.github.regyl.unfriendlyjarvis.entity.LoginEntity;
-import com.github.regyl.unfriendlyjarvis.entity.enums.Source;
 import org.springframework.stereotype.Repository;
 
 @Repository

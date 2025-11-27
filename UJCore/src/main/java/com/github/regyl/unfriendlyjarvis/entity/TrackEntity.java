@@ -1,7 +1,8 @@
 package com.github.regyl.unfriendlyjarvis.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,8 +21,7 @@ import lombok.experimental.SuperBuilder;
 public class TrackEntity extends AbstractEntity {
 
     @NotNull
-    @ManyToOne(cascade = CascadeType.REFRESH, optional = false, fetch = FetchType.LAZY)
-    private Account account;
+    private Long accountId;
 
     @NotNull
     private String name;

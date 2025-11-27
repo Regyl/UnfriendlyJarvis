@@ -1,7 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.service.impl.meme;
 
 import com.github.regyl.unfriendlyjarvis.controller.dto.meme.MemeDto;
-import com.github.regyl.unfriendlyjarvis.entity.Account;
 import com.github.regyl.unfriendlyjarvis.entity.MemeEntity;
 import com.github.regyl.unfriendlyjarvis.model.MemeModel;
 import com.github.regyl.unfriendlyjarvis.repository.MemeRepository;
@@ -54,9 +53,8 @@ public class MemeServiceImpl implements MemeService {
 
     @Override
     public Collection<MemeDto> findAll() {
-        Account account = securityContextService.getAuthorizedAccount();
-
-        return repository.findAllByAccount(account).stream()
+        Long accountId = securityContextService.getUserId();
+        return repository.findAllByAccountId(accountId).stream()
                 .map(memeDtoMapper)
                 .toList();
     }

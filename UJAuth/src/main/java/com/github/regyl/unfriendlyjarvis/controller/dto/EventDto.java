@@ -2,6 +2,7 @@ package com.github.regyl.unfriendlyjarvis.controller.dto;
 
 import com.github.regyl.unfriendlyjarvis.enumeration.EventType;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * DTO which contains information about happened event.
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventDto {

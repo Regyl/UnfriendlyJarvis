@@ -71,9 +71,9 @@ public class JwtTokenReader {
      * @param token JWT token
      * @return user ID
      */
-    public String getUserIdFromToken(String token) {
+    public Long getUserIdFromToken(String token) {
         Claims claims = getClaimsFromToken(token);
-        return claims.get(USER_ID_KEY, String.class);
+        return claims.get(USER_ID_KEY, Long.class);
     }
 
     /**

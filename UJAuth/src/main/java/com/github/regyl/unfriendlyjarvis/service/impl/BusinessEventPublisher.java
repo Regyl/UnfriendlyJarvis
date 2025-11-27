@@ -1,9 +1,9 @@
 package com.github.regyl.unfriendlyjarvis.service.impl;
 
 import com.github.regyl.unfriendlyjarvis.annotation.BusinessEvent;
+import com.github.regyl.unfriendlyjarvis.controller.dto.EventDto;
 import com.github.regyl.unfriendlyjarvis.model.ConvertableEvent;
 import com.github.regyl.unfriendlyjarvis.service.converter.EventConverter;
-import com.github.regyl.unfriendlyjarvis.controller.dto.EventDto;
 import com.github.regyl.unfriendlyjarvis.utils.AspectUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -37,7 +37,7 @@ public class BusinessEventPublisher<T extends ConvertableEvent> {
     public BusinessEventPublisher(List<EventConverter<T>> eventConverters) {
         this.eventConverterMap = eventConverters.stream()
                 .collect(Collectors.toUnmodifiableMap(
-                        EventConverter::getSupportedClass, Function.identity()));
+                        EventConverter::get, Function.identity()));
     }
 
     /**
@@ -63,7 +63,7 @@ public class BusinessEventPublisher<T extends ConvertableEvent> {
             return;
         }
 
-        EventDto eventDto = eventConverter.convert((T) convertableEvent);
+        EventDto eventDto = eventConverter.apply((T) convertableEvent);
         eventDto.setEventType(businessEvent.type());
     }
 }

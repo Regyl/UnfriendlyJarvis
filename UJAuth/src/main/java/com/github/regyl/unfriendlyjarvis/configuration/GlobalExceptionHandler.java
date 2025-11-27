@@ -9,9 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.Clock;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +19,7 @@ import java.util.function.Supplier;
  * Rest controllers exception handler.
  */
 @Slf4j
-@RestControllerAdvice
+//@RestControllerAdvice //FIXME
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
 

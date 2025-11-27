@@ -1,6 +1,5 @@
 package com.github.regyl.unfriendlyjarvis.service.impl.meme;
 
-import com.github.regyl.unfriendlyjarvis.entity.Account;
 import com.github.regyl.unfriendlyjarvis.entity.MemeEntity;
 import com.github.regyl.unfriendlyjarvis.entity.enums.Source;
 import com.github.regyl.unfriendlyjarvis.model.MemeModel;
@@ -23,11 +22,9 @@ public class MemeModelToMemeEntityMapperServiceImpl implements Function<MemeMode
 
     @Override
     public MemeEntity apply(MemeModel model) {
-        Account account = securityContextService.getAuthorizedAccount();
-
         Source source = parseSource(model.getSource());
         return MemeEntity.builder()
-                .account(account)
+                .accountId(securityContextService.getUserId())
                 .bucketPath(model.getBucketPath())
                 .source(source)
                 .created(dateTimeSupplier.get())

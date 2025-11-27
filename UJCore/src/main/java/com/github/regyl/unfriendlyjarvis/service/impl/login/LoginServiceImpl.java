@@ -1,6 +1,5 @@
 package com.github.regyl.unfriendlyjarvis.service.impl.login;
 
-import com.github.regyl.unfriendlyjarvis.entity.Account;
 import com.github.regyl.unfriendlyjarvis.entity.LoginEntity;
 import com.github.regyl.unfriendlyjarvis.entity.enums.Source;
 import com.github.regyl.unfriendlyjarvis.model.LoginModel;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.function.Function;
 
 @Component
@@ -32,13 +30,13 @@ public class LoginServiceImpl implements LoginService {
         Collection<LoginEntity> loginEntities = loginModels.stream().map(mapper).toList();
 
         //clear old accounts
-        repository.deleteAllByAccountAndSource(securityContextService.getAuthorizedAccount(), Source.GOOGLE_PASSWORD_MANAGER);
+        repository.deleteAllByAccountIdAndSource(securityContextService.getUserId(), Source.GOOGLE_PASSWORD_MANAGER);
         repository.saveAll(loginEntities);
     }
 
     @Override
     public Collection<LoginEntity> findAll() {
-        Account account = securityContextService.getAuthorizedAccount();
-        return repository.findAllByAccount(account);
+        Long accountId = securityContextService.getUserId();
+        return repository.findAllByAccountId(accountId);
     }
 }

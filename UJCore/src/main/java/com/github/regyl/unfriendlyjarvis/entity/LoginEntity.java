@@ -1,9 +1,9 @@
 package com.github.regyl.unfriendlyjarvis.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,8 +24,7 @@ import java.time.OffsetDateTime;
 public class LoginEntity extends AbstractEntity {
 
     @NotNull
-    @ManyToOne(cascade = CascadeType.REFRESH, optional = false, fetch = FetchType.LAZY)
-    private Account account;
+    private Long accountId;
 
     @Column(columnDefinition = "VARCHAR(500)")
     private String originUrl;

@@ -5,10 +5,11 @@ import com.github.regyl.unfriendlyjarvis.controller.dto.yandexmusic.feign.licked
 import com.github.regyl.unfriendlyjarvis.controller.dto.yandexmusic.feign.lickedtracks.TrackShort;
 import com.github.regyl.unfriendlyjarvis.controller.dto.yandexmusic.feign.track.TrackInfo;
 import com.github.regyl.unfriendlyjarvis.controller.dto.yandexmusic.feign.track.TrackResponse;
-import com.github.regyl.unfriendlyjarvis.entity.Account;
 import com.github.regyl.unfriendlyjarvis.entity.TrackEntity;
 import com.github.regyl.unfriendlyjarvis.entity.enums.Source;
+import com.github.regyl.unfriendlyjarvis.exception.JarvisException;
 import com.github.regyl.unfriendlyjarvis.feign.YandexMusicFeignClient;
+import com.github.regyl.unfriendlyjarvis.model.AccountModel;
 import com.github.regyl.unfriendlyjarvis.model.TrackModel;
 import com.github.regyl.unfriendlyjarvis.repository.TrackEntityRepository;
 import com.github.regyl.unfriendlyjarvis.service.SecurityContextService;
@@ -37,19 +38,24 @@ public class YandexMusicServiceImpl implements YandexMusicService {
 
     @Override
     public Collection<TrackEntity> findAll() {
-        Account account = securityContextService.getAuthorizedAccount();
-        return repository.findAllByAccount(account);
+        Long accountId = securityContextService.getUserId();
+        return repository.findAllByAccountId(accountId);
     }
 
     @Override
     @Transactional
     public void uploadTracks() {
-        Account account = securityContextService.getAuthorizedAccount();
+        AccountModel account = securityContextService.getAuthorizedAccount();
+        Long yandexMusicAccountId = account.getYandexMusicUserId();
+        if (yandexMusicAccountId == null) {
+            throw new JarvisException("Yandex music account id is not specified in profile");
+        }
+
         LikedTracksResponseDto likedTracks = yandexMusicFeignClient.getLikedTracks(account.getYandexMusicUserId());
         Collection<TrackModel> trackModels = getTracks(likedTracks.getResult().getLibrary().getTracks());
         Collection<TrackEntity> trackEntities = trackModels.stream().map(trackModelMapper).toList();
 
-        repository.deleteAllByAccountAndSource(securityContextService.getAuthorizedAccount(), Source.YANDEX_MUSIC);
+        repository.deleteAllByAccountIdAndSource(securityContextService.getUserId(), Source.YANDEX_MUSIC);
         repository.saveAll(trackEntities);
     }
 

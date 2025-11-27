@@ -1,8 +1,10 @@
 package com.github.regyl.unfriendlyjarvis.service.impl;
 
-import com.github.regyl.unfriendlyjarvis.entity.Account;
+import com.github.regyl.unfriendlyjarvis.enumeration.UserSecretKey;
 import com.github.regyl.unfriendlyjarvis.exception.JwtTokenIsBrokenException;
+import com.github.regyl.unfriendlyjarvis.model.AccountModel;
 import com.github.regyl.unfriendlyjarvis.service.SecurityContextService;
+import com.github.regyl.unfriendlyjarvis.service.usersecretdata.UserSecretDataService;
 import com.github.regyl.unfriendlyjarvis.util.JwtTokenReader;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import java.util.Optional;
 
 /**
  * Implementation of SecurityContextService that extracts account information from JWT token.
@@ -22,22 +26,24 @@ public class SecurityContextServiceImpl implements SecurityContextService {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String BEARER_PREFIX = "Bearer ";
 
-    private static final Account MOCK;
-
-    static {
-        MOCK = new Account();
-        MOCK.setId(1L);
-        MOCK.setLogin("Regyl");
-        MOCK.setYandexMusicUserId(1430257434L);
-    }
+    private final UserSecretDataService userSecretDataService;
 
     private final JwtTokenReader jwtTokenReader;
 
     @Override
-    public Account getAuthorizedAccount() {
+    public Long getUserId() {
         String jwtToken = getJwtTokenFromRequest();
-        String userId = jwtTokenReader.getUserIdFromToken(jwtToken);
-        return MOCK;
+        return jwtTokenReader.getUserIdFromToken(jwtToken);
+    }
+
+    @Override
+    public AccountModel getAuthorizedAccount() {
+        String jwtToken = getJwtTokenFromRequest();
+        Long userId = jwtTokenReader.getUserIdFromToken(jwtToken);
+        Optional<String> optional = userSecretDataService.getSecretData(userId, UserSecretKey.YANDEX_MUSIC_USER_ID.getKey());
+        return AccountModel.builder()
+                .yandexMusicUserId(Long.parseLong(optional.get()))
+                .build();
     }
 
     /**

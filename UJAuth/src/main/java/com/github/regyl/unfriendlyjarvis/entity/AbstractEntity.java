@@ -7,21 +7,22 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
 /**
  * Abstract entity.
  *
  * <p>
- * This class is used to provide common fields to all entities. Default id type is {@link UUID}.
+ * This class is used to provide common fields to all entities. Default id type is {@link Long}.
  */
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
@@ -31,7 +32,7 @@ public abstract class AbstractEntity {
     //TODO change to custom scalable generator
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     @CreationTimestamp
     @Column(name = "creation_date_time", nullable = false)

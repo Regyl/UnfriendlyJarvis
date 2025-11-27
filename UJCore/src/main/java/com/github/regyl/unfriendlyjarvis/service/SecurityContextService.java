@@ -1,8 +1,10 @@
 package com.github.regyl.unfriendlyjarvis.service;
 
-import com.github.regyl.unfriendlyjarvis.entity.Account;
+import com.github.regyl.unfriendlyjarvis.model.AccountModel;
 
 public interface SecurityContextService {
 
-    Account getAuthorizedAccount();
+    AccountModel getAuthorizedAccount();
+
+    Long getUserId();
 }

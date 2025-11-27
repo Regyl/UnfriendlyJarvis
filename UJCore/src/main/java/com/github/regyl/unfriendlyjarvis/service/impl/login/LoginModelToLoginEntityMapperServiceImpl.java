@@ -29,7 +29,7 @@ public class LoginModelToLoginEntityMapperServiceImpl implements Function<LoginM
                 .lastUsed(model.getLastUsed())
                 .passwordLastModified(model.getPasswordLastModified())
                 .source(model.getSource())
-                .account(securityContextService.getAuthorizedAccount())
+                .accountId(securityContextService.getUserId())
                 .created(dateTimeSupplier.get())
                 .build();
     }

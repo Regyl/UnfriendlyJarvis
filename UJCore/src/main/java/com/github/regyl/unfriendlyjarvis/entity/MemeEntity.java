@@ -1,7 +1,9 @@
 package com.github.regyl.unfriendlyjarvis.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -28,8 +30,7 @@ public class MemeEntity extends AbstractEntity {
      * Account owner of the meme.
      */
     @NotNull
-    @ManyToOne(cascade = CascadeType.REFRESH, optional = false, fetch = FetchType.LAZY)
-    private Account account;
+    private Long accountId;
 
     /**
      * Path to the image file in MinIO bucket.

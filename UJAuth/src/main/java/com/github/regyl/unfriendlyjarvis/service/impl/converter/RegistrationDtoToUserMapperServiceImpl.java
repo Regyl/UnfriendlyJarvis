@@ -4,8 +4,6 @@ import com.github.regyl.unfriendlyjarvis.controller.dto.RegistrationDto;
 import com.github.regyl.unfriendlyjarvis.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.mapstruct.Mapping;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 

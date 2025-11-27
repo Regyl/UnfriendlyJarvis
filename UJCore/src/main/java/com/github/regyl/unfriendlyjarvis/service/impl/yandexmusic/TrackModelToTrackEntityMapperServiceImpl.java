@@ -25,7 +25,7 @@ public class TrackModelToTrackEntityMapperServiceImpl implements Function<TrackM
                 .artistName(trackModel.getArtistName())
                 .coverUrl(trackModel.getCoverUrl())
                 .source(Source.YANDEX_MUSIC)
-                .account(securityContextService.getAuthorizedAccount())
+                .accountId(securityContextService.getUserId())
                 .created(dateTimeSupplier.get())
                 .build();
     }

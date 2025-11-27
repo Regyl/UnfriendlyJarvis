@@ -1,28 +1,15 @@
 package com.github.regyl.unfriendlyjarvis.service.converter;
 
-import com.github.regyl.unfriendlyjarvis.model.ConvertableEvent;
 import com.github.regyl.unfriendlyjarvis.controller.dto.EventDto;
-import jakarta.validation.constraints.NotNull;
+import com.github.regyl.unfriendlyjarvis.model.ConvertableEvent;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * DTOs converter to {@link EventDto}.
  *
  * @param <T> target DTO
  */
-public interface EventConverter<T extends ConvertableEvent> {
-
-    /**
-     * Get target DTO type.
-     *
-     * @return DTO type
-     */
-    Class<T> getSupportedClass();
-
-    /**
-     * Convert target DTO to {@link EventDto}.
-     *
-     * @param   dto target
-     * @return  DTO with info about event
-     */
-    EventDto convert(@NotNull T dto);
+public interface EventConverter<T extends ConvertableEvent> extends Supplier<Class<T>>, Function<T, EventDto> {
 }
