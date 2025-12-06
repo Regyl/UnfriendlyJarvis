@@ -40,6 +40,4 @@ public class GoogleLoginCsvParserServiceImpl implements Function<MultipartFile, 
 
         return models;
     }
-
-
 }

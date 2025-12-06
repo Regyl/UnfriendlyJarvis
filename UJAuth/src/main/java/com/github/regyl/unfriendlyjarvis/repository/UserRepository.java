@@ -1,29 +1,29 @@
 package com.github.regyl.unfriendlyjarvis.repository;
 
-import com.github.regyl.unfriendlyjarvis.entity.User;
+import com.github.regyl.unfriendlyjarvis.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 /**
- * Repository for querying {@link User} data.
+ * Repository for querying {@link UserEntity} data.
  */
 @Repository
-public interface UserRepository extends AbstractRepository<User> {
+public interface UserRepository extends AbstractRepository<UserEntity> {
     
     /**
-     * Check if exists a {@link User} with the given email.
+     * Check if exists a {@link UserEntity} with the given email.
      *
-     * @param email {@link User} email.
-     * @return      true if exists a {@link User} with the given email.
+     * @param email {@link UserEntity} email.
+     * @return      true if exists a {@link UserEntity} with the given email.
      */
     boolean existsByEmail(String email);
 
     /**
-     * Find a {@link User} by the given email.
+     * Find a {@link UserEntity} by the given email.
      *
-     * @param email {@link User} email.
-     * @return      {@link User} with the given email.
+     * @param email {@link UserEntity} email.
+     * @return      {@link UserEntity} with the given email.
      */
-    Optional<User> findByEmail(String email);
+    Optional<UserEntity> findByEmail(String email);
 }

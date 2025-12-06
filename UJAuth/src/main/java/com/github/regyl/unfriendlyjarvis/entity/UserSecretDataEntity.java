@@ -21,7 +21,7 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "e_user_secret_data", 
        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "key"}))
 @EqualsAndHashCode(callSuper = true)
-public class UserSecretData extends AbstractEntity {
+public class UserSecretDataEntity extends AbstractEntity {
     
     /**
      * User who owns this secret data.
@@ -29,7 +29,7 @@ public class UserSecretData extends AbstractEntity {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserEntity user;
     
     /**
      * Key identifying the type of secret data.

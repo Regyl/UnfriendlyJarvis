@@ -1,11 +1,7 @@
 package com.github.regyl.unfriendlyjarvis.entity;
 
 import com.github.regyl.unfriendlyjarvis.enumeration.AuthorityEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +18,7 @@ import org.springframework.security.core.GrantedAuthority;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Authority extends AbstractEntity implements GrantedAuthority {
+public class AuthorityEntity extends AbstractEntity implements GrantedAuthority {
 
     @NotEmpty
     @Column(name = "value", nullable = false, unique = true)

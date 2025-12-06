@@ -1,14 +1,10 @@
 package com.github.regyl.unfriendlyjarvis.service.impl.jwt;
 
 import com.github.regyl.unfriendlyjarvis.configuration.security.JwtProperties;
-import com.github.regyl.unfriendlyjarvis.entity.User;
+import com.github.regyl.unfriendlyjarvis.entity.UserEntity;
 import com.github.regyl.unfriendlyjarvis.enumeration.TokenType;
 import com.github.regyl.unfriendlyjarvis.service.jwt.JwtTokenProviderService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +41,7 @@ public class JwtTokenProviderServiceImpl implements JwtTokenProviderService {
      * @return access token
      */
     @Override
-    public String generateAccessToken(User user) {
+    public String generateAccessToken(UserEntity user) {
         return generateToken(user, TokenType.ACCESS);
     }
 
@@ -56,7 +52,7 @@ public class JwtTokenProviderServiceImpl implements JwtTokenProviderService {
      * @return refresh token
      */
     @Override
-    public String generateRefreshToken(User user) {
+    public String generateRefreshToken(UserEntity user) {
         return generateToken(user, TokenType.REFRESH);
     }
 
@@ -67,7 +63,7 @@ public class JwtTokenProviderServiceImpl implements JwtTokenProviderService {
      * @param tokenType token type (ACCESS or REFRESH)
      * @return JWT token
      */
-    private String generateToken(User user, TokenType tokenType) {
+    private String generateToken(UserEntity user, TokenType tokenType) {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + 
                 (tokenType == TokenType.ACCESS 

@@ -1,5 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.service.impl.yandexmusic;
 
+import com.github.regyl.unfriendlyjarvis.annotation.SourceSynced;
 import com.github.regyl.unfriendlyjarvis.configuration.yandexmusic.YandexMusicConfigurationProperties;
 import com.github.regyl.unfriendlyjarvis.controller.dto.yandexmusic.feign.lickedtracks.LikedTracksResponseDto;
 import com.github.regyl.unfriendlyjarvis.controller.dto.yandexmusic.feign.lickedtracks.TrackShort;
@@ -7,9 +8,9 @@ import com.github.regyl.unfriendlyjarvis.controller.dto.yandexmusic.feign.track.
 import com.github.regyl.unfriendlyjarvis.controller.dto.yandexmusic.feign.track.TrackResponse;
 import com.github.regyl.unfriendlyjarvis.entity.TrackEntity;
 import com.github.regyl.unfriendlyjarvis.entity.enums.Source;
+import com.github.regyl.unfriendlyjarvis.enumeration.UserSecretKey;
 import com.github.regyl.unfriendlyjarvis.exception.JarvisException;
 import com.github.regyl.unfriendlyjarvis.feign.YandexMusicFeignClient;
-import com.github.regyl.unfriendlyjarvis.model.AccountModel;
 import com.github.regyl.unfriendlyjarvis.model.TrackModel;
 import com.github.regyl.unfriendlyjarvis.repository.TrackEntityRepository;
 import com.github.regyl.unfriendlyjarvis.service.SecurityContextService;
@@ -43,15 +44,13 @@ public class YandexMusicServiceImpl implements YandexMusicService {
     }
 
     @Override
+    @SourceSynced(source = Source.YANDEX_MUSIC)
     @Transactional
     public void uploadTracks() {
-        AccountModel account = securityContextService.getAuthorizedAccount();
-        Long yandexMusicAccountId = account.getYandexMusicUserId();
-        if (yandexMusicAccountId == null) {
-            throw new JarvisException("Yandex music account id is not specified in profile");
-        }
+        Long yandexMusicAccountId = securityContextService.getAuthorizedUserSecret(UserSecretKey.YANDEX_MUSIC_USER_ID).map(Long::parseLong)
+                .orElseThrow(() -> new JarvisException("Yandex music account id is not specified in profile"));
 
-        LikedTracksResponseDto likedTracks = yandexMusicFeignClient.getLikedTracks(account.getYandexMusicUserId());
+        LikedTracksResponseDto likedTracks = yandexMusicFeignClient.getLikedTracks(yandexMusicAccountId);
         Collection<TrackModel> trackModels = getTracks(likedTracks.getResult().getLibrary().getTracks());
         Collection<TrackEntity> trackEntities = trackModels.stream().map(trackModelMapper).toList();
 

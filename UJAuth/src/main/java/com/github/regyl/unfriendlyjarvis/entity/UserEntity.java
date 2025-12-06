@@ -1,17 +1,13 @@
 package com.github.regyl.unfriendlyjarvis.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Clock;
@@ -23,12 +19,12 @@ import java.util.Set;
  */
 @Data
 @Entity
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "e_user")
 @EqualsAndHashCode(callSuper = true)
-public class User extends AbstractEntity implements OAuthUserDetails, UserDetails {
+public class UserEntity extends AbstractEntity implements OAuthUserDetails, UserDetails {
 
     /**
      * User's login. Must be optional.
@@ -48,7 +44,7 @@ public class User extends AbstractEntity implements OAuthUserDetails, UserDetail
     private String avatarLink;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Authority> authorities;
+    private Set<AuthorityEntity> authorities;
     
     /**
      * To support OAuth 2.0 authorization.

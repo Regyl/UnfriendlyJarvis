@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @Table(name = "e_track")
 @EqualsAndHashCode(callSuper = true)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "account"})
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class TrackEntity extends AbstractEntity {
 
     @NotNull

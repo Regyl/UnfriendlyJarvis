@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.OffsetDateTime;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ import java.util.function.Supplier;
  * Rest controllers exception handler.
  */
 @Slf4j
-//@RestControllerAdvice //FIXME
+@RestControllerAdvice
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
@@ -81,7 +82,7 @@ public class GlobalExceptionHandler {
      * @return  exception information
      */
     @ExceptionHandler(UsernameNotFoundException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     public Map<String, Object> handleUsernameNotFoundException(UsernameNotFoundException e) {
         log.warn("UsernameNotFoundException", e);
         return buildResponseFromException(e);

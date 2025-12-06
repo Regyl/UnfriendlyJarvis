@@ -20,7 +20,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 @Table(name = "e_login")
 @EqualsAndHashCode(callSuper = true)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "account"})
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class LoginEntity extends AbstractEntity {
 
     @NotNull

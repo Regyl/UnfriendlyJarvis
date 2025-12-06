@@ -21,7 +21,3 @@ public interface MemeService {
 
     Collection<MemeDto> findAll();
 }
-
-
-
-

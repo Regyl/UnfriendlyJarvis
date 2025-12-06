@@ -2,7 +2,6 @@ package com.github.regyl.unfriendlyjarvis.service.impl;
 
 import com.github.regyl.unfriendlyjarvis.enumeration.UserSecretKey;
 import com.github.regyl.unfriendlyjarvis.exception.JwtTokenIsBrokenException;
-import com.github.regyl.unfriendlyjarvis.model.AccountModel;
 import com.github.regyl.unfriendlyjarvis.service.SecurityContextService;
 import com.github.regyl.unfriendlyjarvis.service.usersecretdata.UserSecretDataService;
 import com.github.regyl.unfriendlyjarvis.util.JwtTokenReader;
@@ -37,13 +36,10 @@ public class SecurityContextServiceImpl implements SecurityContextService {
     }
 
     @Override
-    public AccountModel getAuthorizedAccount() {
+    public Optional<String> getAuthorizedUserSecret(UserSecretKey key) {
         String jwtToken = getJwtTokenFromRequest();
         Long userId = jwtTokenReader.getUserIdFromToken(jwtToken);
-        Optional<String> optional = userSecretDataService.getSecretData(userId, UserSecretKey.YANDEX_MUSIC_USER_ID.getKey());
-        return AccountModel.builder()
-                .yandexMusicUserId(Long.parseLong(optional.get()))
-                .build();
+        return userSecretDataService.getSecretData(userId, key.getKey());
     }
 
     /**

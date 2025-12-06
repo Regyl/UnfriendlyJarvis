@@ -9,7 +9,3 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemeRepository extends AbstractRepository<MemeEntity> {
 }
-
-
-
-

@@ -1,7 +1,7 @@
 package com.github.regyl.unfriendlyjarvis.service.impl.converter;
 
 import com.github.regyl.unfriendlyjarvis.controller.dto.RegistrationDto;
-import com.github.regyl.unfriendlyjarvis.entity.User;
+import com.github.regyl.unfriendlyjarvis.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,24 +10,24 @@ import org.springframework.stereotype.Component;
 import java.util.function.Function;
 
 /**
- * Converter from {@link RegistrationDto} to {@link User} entity.
+ * Converter from {@link RegistrationDto} to {@link UserEntity} entity.
  *
  * <p>
  * Also encodes password.
  */
 @Component
 @RequiredArgsConstructor
-public class RegistrationDtoToUserMapperServiceImpl implements Function<RegistrationDto, User> {
+public class RegistrationDtoToUserMapperServiceImpl implements Function<RegistrationDto, UserEntity> {
 
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public User apply(RegistrationDto dto) {
+    public UserEntity apply(RegistrationDto dto) {
         if ( dto == null ) {
             return null;
         }
 
-        User.UserBuilder user = User.builder();
+        UserEntity.UserEntityBuilder user = UserEntity.builder();
 
         user.login( dto.getLogin() );
         user.email( dto.getEmail() );

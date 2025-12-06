@@ -1,10 +1,12 @@
 package com.github.regyl.unfriendlyjarvis.service;
 
-import com.github.regyl.unfriendlyjarvis.model.AccountModel;
+import com.github.regyl.unfriendlyjarvis.enumeration.UserSecretKey;
+
+import java.util.Optional;
 
 public interface SecurityContextService {
 
-    AccountModel getAuthorizedAccount();
+    Optional<String> getAuthorizedUserSecret(UserSecretKey key);
 
     Long getUserId();
 }

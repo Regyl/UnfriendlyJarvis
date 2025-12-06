@@ -1,5 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.service.impl.login;
 
+import com.github.regyl.unfriendlyjarvis.annotation.SourceSynced;
 import com.github.regyl.unfriendlyjarvis.entity.LoginEntity;
 import com.github.regyl.unfriendlyjarvis.entity.enums.Source;
 import com.github.regyl.unfriendlyjarvis.model.LoginModel;
@@ -25,6 +26,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     @Transactional
+    @SourceSynced(source = Source.GOOGLE_PASSWORD_MANAGER)
     public void save(MultipartFile file) {
         Collection<LoginModel> loginModels = csvParser.apply(file);
         Collection<LoginEntity> loginEntities = loginModels.stream().map(mapper).toList();

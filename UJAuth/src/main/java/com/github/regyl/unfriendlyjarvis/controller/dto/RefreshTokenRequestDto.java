@@ -17,6 +17,3 @@ public class RefreshTokenRequestDto {
     private String refreshToken;
 }
 
-
-
-

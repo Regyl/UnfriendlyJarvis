@@ -3,7 +3,7 @@ package com.github.regyl.unfriendlyjarvis.service.impl;
 import com.github.regyl.unfriendlyjarvis.annotation.BusinessEvent;
 import com.github.regyl.unfriendlyjarvis.controller.dto.RegistrationDto;
 import com.github.regyl.unfriendlyjarvis.controller.dto.TokenResponseDto;
-import com.github.regyl.unfriendlyjarvis.entity.User;
+import com.github.regyl.unfriendlyjarvis.entity.UserEntity;
 import com.github.regyl.unfriendlyjarvis.enumeration.EventType;
 import com.github.regyl.unfriendlyjarvis.exceptiion.JarvisException;
 import com.github.regyl.unfriendlyjarvis.exceptiion.UserAlreadyExistsException;
@@ -11,7 +11,6 @@ import com.github.regyl.unfriendlyjarvis.repository.UserRepository;
 import com.github.regyl.unfriendlyjarvis.service.AuthService;
 import com.github.regyl.unfriendlyjarvis.service.jwt.JwtTokenProviderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,8 +23,6 @@ import java.util.function.Function;
  */
 @Service
 @RequiredArgsConstructor
-@ConditionalOnProperty(prefix = "application.security",
-        name = "enabled", havingValue = "true", matchIfMissing = true)
 public class AuthServiceImpl implements AuthService {
 
     private static final String USER_NOT_FOUND_MESSAGE = "User with login %s not found";
@@ -34,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final Function<RegistrationDto, User> registrationDtoMapper;
+    private final Function<RegistrationDto, UserEntity> registrationDtoMapper;
     private final JwtTokenProviderService jwtProvider;
 
     @Override
@@ -50,8 +47,8 @@ public class AuthServiceImpl implements AuthService {
             throw new UserAlreadyExistsException(username);
         }
 
-        User newUser = registrationDtoMapper.apply(registrationDto);
-        User savedUser = userRepository.save(newUser);
+        UserEntity newUser = registrationDtoMapper.apply(registrationDto);
+        UserEntity savedUser = userRepository.save(newUser);
         
         return generateTokens(savedUser);
     }
@@ -64,7 +61,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public TokenResponseDto signIn(String username, String password) {
-        User user = userRepository.findByEmail(username)
+        UserEntity user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new JarvisException(INVALID_CREDENTIALS_MESSAGE));
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
@@ -85,7 +82,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         String username = jwtProvider.getUsernameFromToken(refreshToken);
-        User user = userRepository.findByEmail(username)
+        UserEntity user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new JarvisException(INVALID_REFRESH_TOKEN_MESSAGE));
 
         return generateTokens(user);
@@ -97,7 +94,7 @@ public class AuthServiceImpl implements AuthService {
      * @param user user entity
      * @return token response DTO
      */
-    private TokenResponseDto generateTokens(User user) {
+    private TokenResponseDto generateTokens(UserEntity user) {
         String accessToken = jwtProvider.generateAccessToken(user);
         String refreshToken = jwtProvider.generateRefreshToken(user);
         

@@ -1,14 +1,14 @@
 package com.github.regyl.unfriendlyjarvis.service.jwt;
 
-import com.github.regyl.unfriendlyjarvis.entity.User;
+import com.github.regyl.unfriendlyjarvis.entity.UserEntity;
 
 import java.util.List;
 
 public interface JwtTokenProviderService {
 
-    String generateAccessToken(User user);
+    String generateAccessToken(UserEntity user);
 
-    String generateRefreshToken(User user);
+    String generateRefreshToken(UserEntity user);
 
     boolean validateToken(String token);
 

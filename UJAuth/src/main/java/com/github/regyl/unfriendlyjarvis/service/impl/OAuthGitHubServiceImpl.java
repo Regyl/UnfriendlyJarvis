@@ -5,7 +5,7 @@ import com.github.regyl.unfriendlyjarvis.controller.dto.TokenResponseDto;
 import com.github.regyl.unfriendlyjarvis.controller.dto.oauth.OAuthInitializationDto;
 import com.github.regyl.unfriendlyjarvis.controller.dto.oauth.github.UserEmailDto;
 import com.github.regyl.unfriendlyjarvis.controller.dto.oauth.github.UserInfoDto;
-import com.github.regyl.unfriendlyjarvis.entity.User;
+import com.github.regyl.unfriendlyjarvis.entity.UserEntity;
 import com.github.regyl.unfriendlyjarvis.enumeration.OAuthProviderType;
 import com.github.regyl.unfriendlyjarvis.exceptiion.JarvisException;
 import com.github.regyl.unfriendlyjarvis.exceptiion.UserNotFoundException;
@@ -77,7 +77,7 @@ public class OAuthGitHubServiceImpl implements OAuthService {
         String accessToken = oAuthAccessTokenAcquirer.acquire(initializationDto);
         List<UserEmailDto> emails = gitHubFeignClient.getUserEmails(accessToken);
         String email = getPrimaryEmail(emails);
-        User user = userRepository.findByEmail(email)
+        UserEntity user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException(email));
 
         return generateTokens(user);
@@ -107,7 +107,7 @@ public class OAuthGitHubServiceImpl implements OAuthService {
      * @param user user entity
      * @return token response DTO
      */
-    private TokenResponseDto generateTokens(User user) {
+    private TokenResponseDto generateTokens(UserEntity user) {
         String accessToken = jwtProvider.generateAccessToken(user);
         String refreshToken = jwtProvider.generateRefreshToken(user);
         

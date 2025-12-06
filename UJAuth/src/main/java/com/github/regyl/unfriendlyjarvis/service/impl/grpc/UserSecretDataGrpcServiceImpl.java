@@ -1,7 +1,7 @@
 package com.github.regyl.unfriendlyjarvis.service.impl.grpc;
 
-import com.github.regyl.unfriendlyjarvis.entity.User;
-import com.github.regyl.unfriendlyjarvis.entity.UserSecretData;
+import com.github.regyl.unfriendlyjarvis.entity.UserEntity;
+import com.github.regyl.unfriendlyjarvis.entity.UserSecretDataEntity;
 import com.github.regyl.unfriendlyjarvis.enumeration.UserSecretKey;
 import com.github.regyl.unfriendlyjarvis.grpc.*;
 import com.github.regyl.unfriendlyjarvis.repository.UserRepository;
@@ -38,14 +38,14 @@ public class UserSecretDataGrpcServiceImpl extends UserSecretDataServiceGrpc.Use
             Long userId = request.getUserId();
             UserSecretKey key = UserSecretKey.fromKey(request.getKey());
             
-            Optional<User> userOpt = userRepository.findById(userId);
+            Optional<UserEntity> userOpt = userRepository.findById(userId);
             if (userOpt.isEmpty()) {
                 sendErrorResponse(responseObserver, Status.NOT_FOUND, 
                         "User not found with ID: " + request.getUserId());
                 return;
             }
             
-            Optional<UserSecretData> secretDataOpt = 
+            Optional<UserSecretDataEntity> secretDataOpt =
                     userSecretDataRepository.findByUserAndKey(userOpt.get(), key);
             
             if (secretDataOpt.isEmpty()) {
@@ -59,7 +59,7 @@ public class UserSecretDataGrpcServiceImpl extends UserSecretDataServiceGrpc.Use
                 return;
             }
             
-            UserSecretData secretData = secretDataOpt.get();
+            UserSecretDataEntity secretData = secretDataOpt.get();
             GetSecretDataResponse response =
                     GetSecretDataResponse.newBuilder()
                             .setFound(true)
@@ -88,14 +88,14 @@ public class UserSecretDataGrpcServiceImpl extends UserSecretDataServiceGrpc.Use
         try {
             Long userId = request.getUserId();
             
-            Optional<User> userOpt = userRepository.findById(userId);
+            Optional<UserEntity> userOpt = userRepository.findById(userId);
             if (userOpt.isEmpty()) {
                 sendErrorResponse(responseObserver, Status.NOT_FOUND, 
                         "User not found with ID: " + request.getUserId());
                 return;
             }
             
-            List<UserSecretData> secretDataList = userSecretDataRepository.findByUser_Id(userId);
+            List<UserSecretDataEntity> secretDataList = userSecretDataRepository.findByUser_Id(userId);
             
             if (secretDataList.isEmpty()) {
                 GetAllSecretDataResponse response =
