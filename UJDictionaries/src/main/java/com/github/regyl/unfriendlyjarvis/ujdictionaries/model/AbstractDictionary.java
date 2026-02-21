@@ -1,5 +1,6 @@
 package com.github.regyl.unfriendlyjarvis.ujdictionaries.model;
 
+import com.github.regyl.unfriendlyjarvis.ujdictionaries.enumeration.DictionaryType;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -25,7 +26,7 @@ public abstract class AbstractDictionary {
     private UUID id;
     
     @NotEmpty
-    @Column(name = "value", nullable = false)
+    @Column(name = "value", nullable = false, unique = true)
     private String value;
     
     @Column(name = "archived", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")

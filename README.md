@@ -1,10 +1,9 @@
 # Introduction
-This is my pet-project directed to learn such technologies, as:
-- Protocol Buffers
-- Some parts of Spring (BeanPostProcessor, AOP, etc.)
-- NoSQL (Redis, Neo4j)
-- Spring Cloud
-- Tests (testcontainers)
+Used ports:
+- 9090 for gRPC server
+- 9001 for MinIO console
+- 9000 for MinIO API
+
 
 # What and when to use
 - Protocol Buffers fox advanced serialization/deserialization speed, solve problem with Java native mechanism
@@ -13,10 +12,6 @@ This is my pet-project directed to learn such technologies, as:
 - Spring Cloud just for fun, it's my 4 time to use it
 - DestructionAwareBeanPostProcessor
 - Java RMI to remote administration
-- gRPC to communicate between two microservices
-
-# Idk
-- I want an achievement system
 
 # TODO
 - JWT-tokens
